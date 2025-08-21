@@ -67,21 +67,8 @@ const Header = () => {
             >
               Portfolio
             </a>
-
             <a
-              href="#"
-              className="text-gray-700 hover:text-black transition-colors"
-            >
-              Blogs
-            </a>
-            <a
-              href="#"
-              className="text-gray-700 hover:text-black transition-colors"
-            >
-              Career
-            </a>
-            <a
-              href="#"
+              href="#testimonals"
               className="text-gray-700 hover:text-black transition-colors"
             >
               Testimonials
@@ -100,10 +87,13 @@ const Header = () => {
               <Globe className="w-5 h-5" />
               <ChevronDown className="w-4 h-4" />
             </button>
-            <button className="bg-black text-white px-6 py-3 rounded-full hover:bg-gray-800 transition-colors flex items-center space-x-2">
+            <a
+              href="#contact"
+              className="bg-black text-white px-6 py-3 rounded-full hover:bg-gray-800 transition-colors flex items-center space-x-2"
+            >
               <span>Get Quote</span>
               <span>→</span>
-            </button>
+            </a>
           </div>
         </div>
       </div>
