@@ -37,7 +37,7 @@ const MESSAGES = {
         titleLines: ["Settings Infotech tilbyder", "IT-tjenester verden over"],
         desc: "Vi kan udvikle denne type platform.",
         ctas: [
-          { label: "Vores ydelser", href: "/#services" },
+          { label: "Vores ydelser", href: "/services" },
           { label: "Book møde", href: "/contact" },
         ],
         image: "/img/slid/5.webp",
@@ -68,7 +68,7 @@ const MESSAGES = {
         titleLines: ["Settings Infotech Provide", "World Wide IT Services"],
         desc: "We are capable of developing this type of platform.",
         ctas: [
-          { label: "Our service", href: "/#services" },
+          { label: "Our service", href: "/services" },
           { label: "Schedule Meeting", href: "/contact" },
         ],
         image: "/img/slid/5.webp",
