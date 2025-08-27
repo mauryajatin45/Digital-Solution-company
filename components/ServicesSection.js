@@ -1,12 +1,12 @@
 "use client";
-import React, { useMemo } from "react";
+import React from "react";
 import { usePathname } from "next/navigation";
 
 /**
- * Bilingual (Danish default, English alternative)
- * - Locale is taken from the first URL segment: /da or /en
- * - Translates headings, card titles, CTA, and aria labels
- * - Preserves your grid, animations, and icon set
+ * Bilingual section (DA default, EN alternative)
+ * - Locale from first path segment (/da or /en)
+ * - Keeps your 3×2 grid + animations
+ * - Uses Denmark Web in copy
  */
 
 const SUPPORTED_LOCALES = ["da", "en"];
@@ -38,50 +38,48 @@ const T = {
       section: "Ydelsessektion",
       heading: "Ydelser",
     },
+    // 6 rigtige ydelser (3×2 grid)
     cards: [
-      // Kolonne 1
       {
-        title: "Strømlin prøveforløbet",
+        title: "Webudvikling",
         desc:
-          "Lorem ipsum dolor sit amet, consecte tur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.",
-        href: "/#services",
+          "Denmark Web bygger hurtige, sikre og skalerbare websites og webapps – med fokus på performance og tilgængelighed.",
+        href: "/services/web-development",
+        icon: "wand",
+      },
+      {
+        title: "Webdesign & UX",
+        desc:
+          "Brugervenlige interfaces og stærk visuel identitet, der øger engagement og konvertering.",
+        href: "/services/ui-ux",
+        icon: "design",
+      },
+      {
+        title: "E-commerce løsninger",
+        desc:
+          "Webshops der konverterer: produktkatalog, checkout, betalingsgateways og integrationer.",
+        href: "/services/e-commerce",
         icon: "eye",
       },
       {
-        title: "Strømlin prøveforløbet",
+        title: "Hosting",
         desc:
-          "Lorem ipsum dolor sit amet, consecte tur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.",
-        href: "/#services",
-        icon: "wand",
-      },
-      // Kolonne 2
-      {
-        title: "Cloud-baseret lager",
-        desc:
-          "Lorem ipsum dolor sit amet, consecte tur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.",
-        href: "/#services",
+          "Stabil og hurtig hosting med overvågning, backups og skalering efter behov.",
+        href: "/services/hosting",
         icon: "cloud",
       },
       {
-        title: "CTMS-platform",
+        title: "Vedligehold & support",
         desc:
-          "Lorem ipsum dolor sit amet, consecte tur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.",
-        href: "/#services",
-        icon: "design",
-      },
-      // Kolonne 3
-      {
-        title: "Brugervenlig",
-        desc:
-          "Lorem ipsum dolor sit amet, consecte tur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.",
-        href: "/#services",
+          "Løbende opdateringer, sikkerheds-patches og support, så dit site altid kører problemfrit.",
+        href: "/services/maintenance-support",
         icon: "user",
       },
       {
-        title: "19/6 support",
+        title: "SEO-optimering",
         desc:
-          "Lorem ipsum dolor sit amet, consecte tur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.",
-        href: "/#services",
+          "Teknisk SEO, indholdsstruktur og Core Web Vitals for bedre placeringer og mere organisk trafik.",
+        href: "/services/seo-optimization",
         icon: "atom",
       },
     ],
@@ -95,50 +93,48 @@ const T = {
       section: "Services section",
       heading: "Services",
     },
+    // 6 real services (3×2 grid)
     cards: [
-      // Column 1
       {
-        title: "Streamline The Trial",
+        title: "Web Development",
         desc:
-          "Lorem ipsum dolor sit amet, consecte tur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.",
-        href: "/#services",
+          "Denmark Web delivers fast, secure, and scalable websites & web apps with performance and accessibility in mind.",
+        href: "/services/web-development",
+        icon: "wand",
+      },
+      {
+        title: "Web Design & UX",
+        desc:
+          "User-centric interfaces and strong visual identity that boost engagement and conversions.",
+        href: "/services/ui-ux",
+        icon: "design",
+      },
+      {
+        title: "E-commerce Solutions",
+        desc:
+          "Conversion-ready storefronts: catalog, checkout, payment gateways, and integrations.",
+        href: "/services/e-commerce",
         icon: "eye",
       },
       {
-        title: "Streamline The Trial",
+        title: "Hosting",
         desc:
-          "Lorem ipsum dolor sit amet, consecte tur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.",
-        href: "/#services",
-        icon: "wand",
-      },
-      // Column 2
-      {
-        title: "Cloud-based Storage",
-        desc:
-          "Lorem ipsum dolor sit amet, consecte tur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.",
-        href: "/#services",
+          "Stable, high-performance hosting with monitoring, backups, and elastic scaling.",
+        href: "/services/hosting",
         icon: "cloud",
       },
       {
-        title: "CTMS Platform",
+        title: "Maintenance & Support",
         desc:
-          "Lorem ipsum dolor sit amet, consecte tur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.",
-        href: "/#services",
-        icon: "design",
-      },
-      // Column 3
-      {
-        title: "User Friendly",
-        desc:
-          "Lorem ipsum dolor sit amet, consecte tur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.",
-        href: "/#services",
+          "Ongoing updates, security patches, and support so your site keeps running smoothly.",
+        href: "/services/maintenance-support",
         icon: "user",
       },
       {
-        title: "19/6 Support",
+        title: "SEO Optimization",
         desc:
-          "Lorem ipsum dolor sit amet, consecte tur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.",
-        href: "/#services",
+          "Technical SEO, content structure, and Core Web Vitals to rank higher and grow organic traffic.",
+        href: "/services/seo-optimization",
         icon: "atom",
       },
     ],
@@ -152,16 +148,13 @@ export default function ServicesSection({ id = "services" }) {
   const locale = getLocaleFromPath(pathname);
   const messages = T[locale] ?? T[DEFAULT_LOCALE];
 
-  // keep your exact 3x2 layout, but source content from the locale
+  // 3 columns × 2 cards each
   const col1 = messages.cards.slice(0, 2);
   const col2 = messages.cards.slice(2, 4);
   const col3 = messages.cards.slice(4, 6);
 
-  // ensure locale prefix on internal links starting with "/"
   const withLocale = (href) =>
-    href?.startsWith("/")
-      ? replaceLocaleInPath(href, locale)
-      : href || "#";
+    href?.startsWith("/") ? replaceLocaleInPath(href, locale) : href || "#";
 
   return (
     <section
@@ -178,7 +171,7 @@ export default function ServicesSection({ id = "services" }) {
 
       <div className="relative mx-auto max-w-7xl px-6">
         <div className="grid gap-8 md:gap-10 lg:grid-cols-3">
-          {/* Column 1 (includes headings + 2 cards) */}
+          {/* Column 1 (eyebrow + heading + 2 cards) */}
           <div>
             <div className="__desktop-fadeInLeft">
               <h4 className="text-sm font-semibold uppercase tracking-wider text-gray-700">
@@ -199,7 +192,6 @@ export default function ServicesSection({ id = "services" }) {
                   key={`${card.title}-${i}`}
                   {...card}
                   href={withLocale(card.href)}
-                  // match WP: fadeInUp for boxes
                   className="__desktop-fadeInUp"
                   delay={i * 80}
                   ctaLabel={messages.cta}
@@ -289,13 +281,13 @@ function IconBox({ title, desc, href, icon, className = "", delay = 0, ctaLabel 
       ].join(" ")}
       style={{ animationDelay: `${delay}ms` }}
     >
-      {/* Hover-from-left accent */}
+      {/* Hover accent */}
       <span
         className="pointer-events-none absolute left-0 top-0 h-full w-[6px] -translate-x-2 bg-black/80 opacity-0 transition-all duration-300 group-hover:translate-x-0 group-hover:opacity-100"
         aria-hidden="true"
       />
 
-      {/* Header: icon badge on top */}
+      {/* Icon badge */}
       <div className="icon-box icon-box-header">
         <div className="icon bg-style-color">
           <span className="grid h-14 w-14 place-content-center rounded-full bg-black text-white">
@@ -323,7 +315,7 @@ function IconBox({ title, desc, href, icon, className = "", delay = 0, ctaLabel 
         </div>
       </div>
 
-      {/* Watermark icon (top-right) */}
+      {/* Watermark icon */}
       <div
         className="hover-watermark pointer-events-none absolute -right-6 -top-6 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
         aria-hidden="true"
@@ -334,31 +326,31 @@ function IconBox({ title, desc, href, icon, className = "", delay = 0, ctaLabel 
   );
 }
 
-/* ---------------- Icons (monochrome, matches 'gtn-*' look) ---------------- */
+/* ---------------- Simple monochrome icon set ---------------- */
 
 function Icon({ type, className = "" }) {
   switch (type) {
-    case "eye":
+    case "eye": // used for E-commerce (neutral symbol)
       return (
         <svg viewBox="0 0 24 24" className={className} fill="none" aria-hidden="true">
           <path d="M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6-10-6-10-6Z" stroke="currentColor" strokeWidth="1.6" />
           <circle cx="12" cy="12" r="3" stroke="currentColor" strokeWidth="1.6" />
         </svg>
       );
-    case "wand":
+    case "wand": // used for Web development
       return (
         <svg viewBox="0 0 24 24" className={className} fill="none" aria-hidden="true">
           <path d="M3 21L15 9" stroke="currentColor" strokeWidth="1.6" />
           <path d="M17 3v2M21 7h-2M19 3l-1 1M21 5l-1 1M15 3l1 1M17 7l1 1" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
         </svg>
       );
-    case "cloud":
+    case "cloud": // hosting
       return (
         <svg viewBox="0 0 24 24" className={className} fill="none" aria-hidden="true">
           <path d="M7 18h9a4 4 0 0 0 0-8 6 6 0 0 0-11-1.5A4.5 4.5 0 0 0 7 18Z" stroke="currentColor" strokeWidth="1.6" />
         </svg>
       );
-    case "design":
+    case "design": // web design & UX
       return (
         <svg viewBox="0 0 24 24" className={className} fill="none" aria-hidden="true">
           <rect x="3" y="3" width="8" height="8" rx="1.5" stroke="currentColor" strokeWidth="1.6" />
@@ -367,14 +359,14 @@ function Icon({ type, className = "" }) {
           <path d="M13 17h8" stroke="currentColor" strokeWidth="1.6" />
         </svg>
       );
-    case "user":
+    case "user": // maintenance & support
       return (
         <svg viewBox="0 0 24 24" className={className} fill="none" aria-hidden="true">
           <circle cx="12" cy="8" r="3.5" stroke="currentColor" strokeWidth="1.6" />
           <path d="M4 20a8 8 0 0 1 16 0" stroke="currentColor" strokeWidth="1.6" />
         </svg>
       );
-    case "atom":
+    case "atom": // SEO optimization
       return (
         <svg viewBox="0 0 24 24" className={className} fill="none" aria-hidden="true">
           <circle cx="12" cy="12" r="1.8" fill="currentColor" />

@@ -14,11 +14,8 @@ import {
 import { usePathname, useRouter } from "next/navigation";
 
 /**
- * Inline bilingual translations (Danish default, English alternative).
- * We read the locale from the first path segment: /da or /en.
- * Switching language rewrites the URL to keep pages shareable & SEO-friendly.
+ * Locale + copy
  */
-
 const SUPPORTED_LOCALES = ["da", "en"];
 const DEFAULT_LOCALE = "da";
 
@@ -27,7 +24,6 @@ const MESSAGES = {
     brandShort: "DW",
     brand: "Denmark Web",
     brandTag: "Design • Byg • Vækst",
-
     nav: {
       home: "Hjem",
       services: "Ydelser",
@@ -36,13 +32,11 @@ const MESSAGES = {
       testimonials: "Udtalelser",
       contact: "Kontakt",
     },
-
     services: [
       { label: "Webudvikling", desc: "Højtydende websites & apps", icon: Code2, href: "#" },
       { label: "E-handel", desc: "Konverteringsfokuserede webshops", icon: ShoppingBag, href: "#" },
       { label: "Digital marketing", desc: "SEO, content & vækst", icon: Megaphone, href: "#" },
     ],
-
     ctaQuote: "Få et tilbud",
     language: "Sprog",
     aria: {
@@ -54,18 +48,15 @@ const MESSAGES = {
       servicesMenu: "Ydelser",
       langMenu: "Sprog",
     },
-
     langs: [
       { code: "da", label: "Dansk" },
       { code: "en", label: "English" },
     ],
   },
-
   en: {
     brandShort: "DW",
     brand: "Denmark Web",
     brandTag: "Design • Build • Grow",
-
     nav: {
       home: "Home",
       services: "Services",
@@ -74,13 +65,11 @@ const MESSAGES = {
       testimonials: "Testimonials",
       contact: "Contact",
     },
-
     services: [
       { label: "Web Development", desc: "High-performance sites & apps", icon: Code2, href: "#" },
       { label: "E-commerce", desc: "Conversion-focused storefronts", icon: ShoppingBag, href: "#" },
       { label: "Digital Marketing", desc: "SEO, content & growth", icon: Megaphone, href: "#" },
     ],
-
     ctaQuote: "Get a Quote",
     language: "Language",
     aria: {
@@ -92,7 +81,6 @@ const MESSAGES = {
       servicesMenu: "Services",
       langMenu: "Languages",
     },
-
     langs: [
       { code: "da", label: "Dansk" },
       { code: "en", label: "English" },
@@ -100,27 +88,30 @@ const MESSAGES = {
   },
 };
 
-/** Helpers to read/write locale from path */
+/* ---------- helpers ---------- */
 function getLocaleFromPath(pathname) {
   const first = pathname.split("/").filter(Boolean)[0];
   return SUPPORTED_LOCALES.includes(first) ? first : DEFAULT_LOCALE;
 }
-
 function replaceLocaleInPath(pathname, nextLocale) {
   const parts = pathname.split("/").filter(Boolean);
-  if (SUPPORTED_LOCALES.includes(parts[0])) {
-    parts[0] = nextLocale;
-  } else {
-    parts.unshift(nextLocale);
-  }
+  if (SUPPORTED_LOCALES.includes(parts[0])) parts[0] = nextLocale;
+  else parts.unshift(nextLocale);
   return "/" + parts.join("/");
 }
+/** is this the HOME route?  (/ , /da , /en) */
+function isHomePath(pathname) {
+  const parts = pathname.split("/").filter(Boolean);
+  if (SUPPORTED_LOCALES.includes(parts[0])) parts.shift();
+  return parts.length === 0;
+}
 
+/* ---------- component ---------- */
 const Header = () => {
-  const pathname = usePathname();
+  const pathname = usePathname() || "/";
   const router = useRouter();
 
-  const locale = useMemo(() => getLocaleFromPath(pathname || "/"), [pathname]);
+  const locale = useMemo(() => getLocaleFromPath(pathname), [pathname]);
   const T = MESSAGES[locale] ?? MESSAGES[DEFAULT_LOCALE];
 
   const [scrolled, setScrolled] = useState(false);
@@ -132,7 +123,8 @@ const Header = () => {
   const langRef = useRef(null);
   const mobileRef = useRef(null);
 
-  // Shadow on scroll
+  // scroll -> only matters on HOME (non-home is always opaque)
+  const home = isHomePath(pathname);
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 6);
     onScroll();
@@ -140,21 +132,19 @@ const Header = () => {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  // Close on outside click (desktop dropdowns)
+  // outside click
   useEffect(() => {
     function onClick(e) {
-      if (servicesOpen && servicesRef.current && !servicesRef.current.contains(e.target)) {
+      if (servicesOpen && servicesRef.current && !servicesRef.current.contains(e.target))
         setServicesOpen(false);
-      }
-      if (langOpen && langRef.current && !langRef.current.contains(e.target)) {
+      if (langOpen && langRef.current && !langRef.current.contains(e.target))
         setLangOpen(false);
-      }
     }
     document.addEventListener("mousedown", onClick);
     return () => document.removeEventListener("mousedown", onClick);
   }, [servicesOpen, langOpen]);
 
-  // Close on escape for global menus
+  // esc
   useEffect(() => {
     function onKey(e) {
       if (e.key === "Escape") {
@@ -167,19 +157,17 @@ const Header = () => {
     return () => document.removeEventListener("keydown", onKey);
   }, []);
 
-  // Focus first focusable in the mobile menu when opened
+  // focus first element in mobile drawer
   useEffect(() => {
     if (mobileOpen && mobileRef.current) {
-      const firstFocusable = mobileRef.current.querySelector(
-        'a, button, [tabindex]:not([tabindex="-1"])'
-      );
-      firstFocusable?.focus();
+      const el = mobileRef.current.querySelector('a,button,[tabindex]:not([tabindex="-1"])');
+      el?.focus();
     }
   }, [mobileOpen]);
 
   const toggleMobile = () => setMobileOpen((v) => !v);
 
-  // Switch locale and update the URL (preserves path & hash)
+  // language switch
   const handleSwitchLocale = (next) => {
     const newPath = replaceLocaleInPath(window.location.pathname, next);
     const search = window.location.search || "";
@@ -188,11 +176,32 @@ const Header = () => {
     setLangOpen(false);
   };
 
-  const top = !scrolled; // true at the very top
+  /**
+   * Transparent/white logic
+   * - top: home && !scrolled   -> transparent header, white text
+   * - else:                     -> opaque white header, black text
+   */
+  const top = home && !scrolled;
+
+  // Dynamic color tokens
+  const headerClass = top
+    ? "border-b border-transparent bg-transparent text-white"
+    : "border-b border-gray-200 bg-white text-gray-900 shadow-sm";
+
+  const linkText = top ? "text-white hover:text-white/90" : "text-gray-800 hover:text-gray-900";
+  const underlineColor = top ? "bg-white" : "bg-black";
+  const brandNameColor = top ? "text-white" : "text-gray-900";
+  const brandTagColor = top ? "text-white/75" : "text-gray-500";
+  const burgerColor = top ? "text-white hover:bg-white/10" : "text-gray-700 hover:bg-gray-100 hover:text-gray-900";
+
+  // CTA contrast (white pill on transparent, black pill on white header)
+  const ctaClass = top
+    ? "bg-white text-black hover:bg-white/90 focus-visible:ring-white/50"
+    : "bg-black text-white hover:bg-black/90 focus-visible:ring-black/50";
 
   return (
     <>
-      {/* Skip link for a11y */}
+      {/* Skip link */}
       <a
         href="#main"
         className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[100] focus:rounded-md focus:bg-black focus:px-3 focus:py-2 focus:text-white"
@@ -203,9 +212,7 @@ const Header = () => {
       <header
         className={[
           "fixed inset-x-0 top-0 z-50 transition-all motion-safe:duration-300",
-          top
-            ? "border-b border-transparent bg-transparent text-white"
-            : "border-b border-gray-200 bg-white/85 backdrop-blur supports-[backdrop-filter]:bg-white/65 text-gray-900 shadow-sm",
+          headerClass,
         ].join(" ")}
         role="banner"
       >
@@ -214,31 +221,23 @@ const Header = () => {
             {/* Brand */}
             <a
               href={replaceLocaleInPath("/", locale)}
-              className="flex items-center gap-2 rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black/50"
+              className="flex items-center gap-2 rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black/20"
               aria-label={T.aria.brandHome}
             >
-              {/* Replace with an <img/> or <Logo/> as needed */}
               <div className="grid h-9 w-9 place-items-center rounded-md bg-black text-white">
                 <span className="text-sm font-bold">{T.brandShort}</span>
               </div>
               <div className="flex flex-col">
-                <span className="text-base font-semibold tracking-tight">
+                <span className={`text-base font-semibold tracking-tight ${brandNameColor}`}>
                   {T.brand}
                 </span>
-                <span
-                  className={[
-                    "text-[11px] leading-none",
-                    top ? "text-white/80" : "text-gray-500",
-                  ].join(" ")}
-                >
-                  {T.brandTag}
-                </span>
+                <span className={`text-[11px] leading-none ${brandTagColor}`}>{T.brandTag}</span>
               </div>
             </a>
 
-            {/* Desktop Nav */}
+            {/* Desktop nav */}
             <nav className="hidden items-center gap-2 lg:flex" aria-label="Primary">
-              <NavLink href={replaceLocaleInPath("/", locale)} top={top}>
+              <NavLink href={replaceLocaleInPath("/", locale)} linkText={linkText} underlineColor={underlineColor}>
                 {T.nav.home}
               </NavLink>
 
@@ -246,10 +245,7 @@ const Header = () => {
               <div className="relative" ref={servicesRef}>
                 <button
                   type="button"
-                  className={[
-                    "group inline-flex items-center gap-1 rounded-md px-3 py-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black/50",
-                    top ? "text-white/90 hover:text-white" : "text-gray-700 hover:text-gray-900",
-                  ].join(" ")}
+                  className={`group inline-flex items-center gap-1 rounded-md px-3 py-2 ${linkText} focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black/20`}
                   aria-haspopup="menu"
                   aria-expanded={servicesOpen}
                   aria-controls="services-menu"
@@ -259,22 +255,18 @@ const Header = () => {
                   <span className="inline-flex items-center gap-2">
                     {T.nav.services}
                     <ChevronDown
-                      className={[
-                        "h-4 w-4 text-current transition-transform motion-safe:duration-200",
-                        servicesOpen ? "rotate-180" : "rotate-0",
-                      ].join(" ")}
+                      className={`h-4 w-4 text-current transition-transform motion-safe:duration-200 ${
+                        servicesOpen ? "rotate-180" : "rotate-0"
+                      }`}
                       aria-hidden
                     />
                   </span>
                   <span
-                    className={[
-                      "pointer-events-none absolute inset-x-3 -bottom-0.5 h-[2px] origin-center scale-x-0 rounded transition-transform motion-safe:duration-200 group-hover:scale-x-100",
-                      top ? "bg-white" : "bg-gray-900",
-                    ].join(" ")}
+                    className={`pointer-events-none absolute inset-x-3 -bottom-0.5 h-[2px] origin-center scale-x-0 rounded transition-transform motion-safe:duration-200 group-hover:scale-x-100 ${underlineColor}`}
                   />
                 </button>
 
-                {/* Menu panel */}
+                {/* Dropdown panel (white for readability) */}
                 <div
                   id="services-menu"
                   role="menu"
@@ -296,16 +288,14 @@ const Header = () => {
                           role="menuitem"
                           className="flex items-start gap-3 rounded-md px-3 py-2 hover:bg-gray-50 focus:bg-gray-50 focus:outline-none"
                         >
-                          <span className="mt-0.5 grid h-8 w-8 place-items-center rounded-md bg-gray-900/90 text-white">
+                          <span className="mt-0.5 grid h-8 w-8 place-items-center rounded-md bg-gray-900 text-white">
                             <Icon className="h-4 w-4" aria-hidden />
                           </span>
                           <span className="flex min-w-0 flex-col">
                             <span className="truncate text-sm font-medium text-gray-900">
                               {label}
                             </span>
-                            <span className="truncate text-xs text-gray-500">
-                              {desc}
-                            </span>
+                            <span className="truncate text-xs text-gray-500">{desc}</span>
                           </span>
                         </a>
                       </li>
@@ -314,30 +304,27 @@ const Header = () => {
                 </div>
               </div>
 
-              <NavLink href={replaceLocaleInPath("/#About", locale)} top={top}>
+              <NavLink href={replaceLocaleInPath("/#About", locale)} linkText={linkText} underlineColor={underlineColor}>
                 {T.nav.about}
               </NavLink>
-              <NavLink href={replaceLocaleInPath("/#portfolio", locale)} top={top}>
+              <NavLink href={replaceLocaleInPath("/#portfolio", locale)} linkText={linkText} underlineColor={underlineColor}>
                 {T.nav.portfolio}
               </NavLink>
-              <NavLink href={replaceLocaleInPath("/#testimonials", locale)} top={top}>
+              <NavLink href={replaceLocaleInPath("/#testimonials", locale)} linkText={linkText} underlineColor={underlineColor}>
                 {T.nav.testimonials}
               </NavLink>
-              <NavLink href={replaceLocaleInPath("/#contact", locale)} top={top}>
+              <NavLink href={replaceLocaleInPath("/contact", locale)} linkText={linkText} underlineColor={underlineColor}>
                 {T.nav.contact}
               </NavLink>
             </nav>
 
-            {/* Right side: Language + CTA (desktop) */}
+            {/* Right: language + CTA */}
             <div className="hidden items-center gap-2 lg:flex">
-              {/* Language menu */}
+              {/* Language */}
               <div className="relative" ref={langRef}>
                 <button
                   type="button"
-                  className={[
-                    "inline-flex items-center gap-2 rounded-md px-3 py-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black/50",
-                    top ? "text-white/90 hover:text-white" : "text-gray-700 hover:text-gray-900",
-                  ].join(" ")}
+                  className={`inline-flex items-center gap-2 rounded-md px-3 py-2 ${linkText} focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black/20`}
                   aria-haspopup="menu"
                   aria-expanded={langOpen}
                   aria-controls="lang-menu"
@@ -346,13 +333,13 @@ const Header = () => {
                   <Globe className="h-5 w-5 text-current" aria-hidden />
                   <span className="text-sm">{locale.toUpperCase()}</span>
                   <ChevronDown
-                    className={[
-                      "h-4 w-4 text-current transition-transform motion-safe:duration-200",
-                      langOpen ? "rotate-180" : "rotate-0",
-                    ].join(" ")}
+                    className={`h-4 w-4 text-current transition-transform motion-safe:duration-200 ${
+                      langOpen ? "rotate-180" : "rotate-0"
+                    }`}
                     aria-hidden
                   />
                 </button>
+
                 <div
                   id="lang-menu"
                   role="menu"
@@ -375,13 +362,13 @@ const Header = () => {
                       {l.label}
                     </button>
                   ))}
-
                 </div>
               </div>
 
+              {/* CTA with contrast swap */}
               <a
-                href={replaceLocaleInPath("/#contact", locale)}
-                className="group inline-flex items-center gap-2 rounded-full bg-gray-900 px-4 py-2.5 text-sm font-medium text-white transition-colors hover:bg-black focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black/50"
+                href={replaceLocaleInPath("/contact", locale)}
+                className={`group inline-flex items-center gap-2 rounded-full px-4 py-2.5 text-sm font-medium transition-colors focus-visible:outline-none ${ctaClass}`}
               >
                 <span>{T.ctaQuote}</span>
                 <ArrowRight
@@ -391,15 +378,10 @@ const Header = () => {
               </a>
             </div>
 
-            {/* Mobile burger */}
+            {/* Mobile toggle */}
             <button
               type="button"
-              className={[
-                "inline-flex items-center gap-2 rounded-md p-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black/50 lg:hidden",
-                top
-                  ? "text-white hover:bg-white/10"
-                  : "text-gray-700 hover:bg-gray-100 hover:text-gray-900",
-              ].join(" ")}
+              className={`inline-flex items-center gap-2 rounded-md p-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black/20 lg:hidden ${burgerColor}`}
               aria-label={T.aria.openMenu}
               aria-expanded={mobileOpen}
               onClick={toggleMobile}
@@ -409,38 +391,28 @@ const Header = () => {
           </div>
         </div>
 
-        {/* Mobile drawer + overlay */}
+        {/* Mobile drawer */}
         <div
           aria-hidden={!mobileOpen}
-          className={[
-            "fixed inset-0 z-40 lg:hidden",
-            mobileOpen ? "pointer-events-auto" : "pointer-events-none",
-          ].join(" ")}
+          className={`fixed inset-0 z-40 lg:hidden ${mobileOpen ? "pointer-events-auto" : "pointer-events-none"}`}
         >
-          {/* Overlay */}
           <div
-            className={[
-              "absolute inset-0 bg-black/30 transition-opacity motion-safe:duration-200",
-              mobileOpen ? "opacity-100" : "opacity-0",
-            ].join(" ")}
+            className={`absolute inset-0 bg-black/40 transition-opacity motion-safe:duration-200 ${
+              mobileOpen ? "opacity-100" : "opacity-0"
+            }`}
             onClick={() => setMobileOpen(false)}
           />
-          {/* Panel */}
           <div
             ref={mobileRef}
-            className={[
-              "absolute right-0 top-0 h-full w-[88%] max-w-sm bg-white shadow-xl outline-none",
-              "motion-safe:transition-transform motion-safe:duration-300",
-              mobileOpen ? "translate-x-0" : "translate-x-full",
-            ].join(" ")}
+            className={`absolute right-0 top-0 h-full w-[88%] max-w-sm bg-white shadow-xl outline-none motion-safe:transition-transform motion-safe:duration-300 ${
+              mobileOpen ? "translate-x-0" : "translate-x-full"
+            }`}
             role="dialog"
             aria-modal="true"
             aria-label={T.aria.mobileNav}
           >
             <div className="flex items-center justify-between px-4 py-4">
-              <span className="text-base font-semibold text-gray-900">
-                {T.brand}
-              </span>
+              <span className="text-base font-semibold text-gray-900">{T.brand}</span>
               <button
                 type="button"
                 className="rounded-md p-2 text-gray-600 hover:bg-gray-100 hover:text-gray-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black/50"
@@ -452,11 +424,13 @@ const Header = () => {
             </div>
 
             <nav className="px-2 pb-6 pt-2" aria-label="Mobile Primary">
-              <MobileLink href={replaceLocaleInPath("/", locale)} onClick={() => setMobileOpen(false)}>
+              <MobileLink
+                href={replaceLocaleInPath("/", locale)}
+                onClick={() => setMobileOpen(false)}
+              >
                 {T.nav.home}
               </MobileLink>
 
-              {/* Collapsible Services */}
               <details className="group" aria-label={T.aria.servicesMenu}>
                 <summary className="flex cursor-pointer list-none items-center justify-between rounded-md px-2 py-2.5 text-[15px] font-medium text-gray-800 hover:bg-gray-50">
                   <span>{T.nav.services}</span>
@@ -470,32 +444,42 @@ const Header = () => {
                       className="flex items-start gap-3 rounded-md px-2 py-2 hover:bg-gray-50 active:bg-gray-100"
                       onClick={() => setMobileOpen(false)}
                     >
-                      <span className="mt-0.5 grid h-8 w-8 place-items-center rounded-md bg-gray-900/90 text-white">
+                      <span className="mt-0.5 grid h-8 w-8 place-items-center rounded-md bg-gray-900 text-white">
                         <Icon className="h-4 w-4" aria-hidden />
                       </span>
                       <span className="flex min-w-0 flex-col">
                         <span className="truncate text-[15px] font-medium text-gray-900">
                           {label}
-                        </span>
-                        <span className="truncate text-sm text-gray-500">
-                          {desc}
-                        </span>
+                         </span>
+                        <span className="truncate text-sm text-gray-500">{desc}</span>
                       </span>
                     </a>
                   ))}
                 </div>
               </details>
 
-              <MobileLink href={replaceLocaleInPath("/#About", locale)} onClick={() => setMobileOpen(false)}>
+              <MobileLink
+                href={replaceLocaleInPath("/#About", locale)}
+                onClick={() => setMobileOpen(false)}
+              >
                 {T.nav.about}
               </MobileLink>
-              <MobileLink href={replaceLocaleInPath("/#portfolio", locale)} onClick={() => setMobileOpen(false)}>
+              <MobileLink
+                href={replaceLocaleInPath("/#portfolio", locale)}
+                onClick={() => setMobileOpen(false)}
+              >
                 {T.nav.portfolio}
               </MobileLink>
-              <MobileLink href={replaceLocaleInPath("/#testimonials", locale)} onClick={() => setMobileOpen(false)}>
+              <MobileLink
+                href={replaceLocaleInPath("/#testimonials", locale)}
+                onClick={() => setMobileOpen(false)}
+              >
                 {T.nav.testimonials}
               </MobileLink>
-              <MobileLink href={replaceLocaleInPath("/#contact", locale)} onClick={() => setMobileOpen(false)}>
+              <MobileLink
+                href={replaceLocaleInPath("/contact", locale)}
+                onClick={() => setMobileOpen(false)}
+              >
                 {T.nav.contact}
               </MobileLink>
 
@@ -523,8 +507,8 @@ const Header = () => {
               {/* CTA */}
               <div className="mt-6">
                 <a
-                  href={replaceLocaleInPath("/#contact", locale)}
-                  className="group inline-flex w-full items-center justify-center gap-2 rounded-full bg-gray-900 px-4 py-3 text-[15px] font-medium text-white hover:bg-black focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black/50"
+                  href={replaceLocaleInPath("/contact", locale)}
+                  className="group inline-flex w-full items-center justify-center gap-2 rounded-full bg-black px-4 py-3 text-[15px] font-medium text-white hover:bg-black/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black/50"
                   onClick={() => setMobileOpen(false)}
                 >
                   {T.ctaQuote}
@@ -539,22 +523,15 @@ const Header = () => {
   );
 };
 
-/** --------- Subcomponents --------- */
-
-const NavLink = ({ href, children, top = false }) => (
+/* -------- subcomponents -------- */
+const NavLink = ({ href, children, linkText, underlineColor }) => (
   <a
     href={href}
-    className={[
-      "group relative rounded-md px-3 py-2 text-sm font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black/50",
-      top ? "text-white/90 hover:text-white" : "text-gray-700 hover:text-gray-900",
-    ].join(" ")}
+    className={`group relative rounded-md px-3 py-2 text-sm font-medium ${linkText} focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black/20`}
   >
     <span>{children}</span>
     <span
-      className={[
-        "pointer-events-none absolute inset-x-3 -bottom-0.5 h-[2px] origin-center scale-x-0 rounded transition-transform motion-safe:duration-200 group-hover:scale-x-100",
-        top ? "bg-white" : "bg-gray-900",
-      ].join(" ")}
+      className={`pointer-events-none absolute inset-x-3 -bottom-0.5 h-[2px] origin-center scale-x-0 rounded transition-transform motion-safe:duration-200 group-hover:scale-x-100 ${underlineColor}`}
     />
   </a>
 );

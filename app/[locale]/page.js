@@ -1,12 +1,11 @@
 // app/page.js
 'use client';
 
+import Contact from '@/components/Contact';
 import Header from '@/components/Header';
 import HeroSection from '@/components/HeroSection';
-// import AboutSection from '../components/AboutSection';
 import ExpertiseSection from '@/components/ExpertiseSection';
 import CreativePortfolio from '@/components/CreativePortfolio';
-import Contact from '@/components/Contact';
 import ResultsSection from '@/components/ResultsSection';
 import TeamSection from '@/components/TeamSection';
 import ServicesSection from '@/components/ServicesSection';

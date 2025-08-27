@@ -209,13 +209,13 @@ export default function HeroSection() {
       </div>
 
       {/* Custom prev / next controls */}
-      <div className="pointer-events-none absolute inset-0 z-[3]">
+      {/* <div className="pointer-events-none absolute inset-0 z-[3]">
         <div className="absolute left-3 top-1/2 -translate-y-1/2 sm:left-6">
           <button
             ref={prevRef}
             type="button"
             aria-label={T.prev}
-            className="pointer-events-auto swiper-button-prev swiper-nav-ctrl custom-btn grid h-10 w-10 place-items-center rounded-full border border-white/50 bg-white/10 text-white backdrop-blur transition hover:bg-white/20 sm:h-12 sm:w-12"
+            className="pointer-events-auto swiper-button-prev swiper-nav-ctrl custom-btn grid h-10 w-10 place-items-center rounded-full  sm:h-12 sm:w-12"
           >
             <svg
               width="10"
@@ -234,7 +234,7 @@ export default function HeroSection() {
             ref={nextRef}
             type="button"
             aria-label={T.next}
-            className="pointer-events-auto swiper-button-next swiper-nav-ctrl custom-btn grid h-10 w-10 place-items-center rounded-full border border-white/50 bg-white/10 text-white backdrop-blur transition hover:bg-white/20 sm:h-12 sm:w-12"
+            className="pointer-events-auto swiper-button-next swiper-nav-ctrl custom-btn grid h-10 w-10 place-items-center rounded-full border sm:h-12 sm:w-12"
           >
             <svg
               width="10"
@@ -247,7 +247,7 @@ export default function HeroSection() {
             </svg>
           </button>
         </div>
-      </div>
+      </div> */}
 
       {/* Circular Inquiry button */}
       <article className="pointer-events-none absolute bottom-7 left-1/2 z-[3] -translate-x-1/2 sm:bottom-10">
