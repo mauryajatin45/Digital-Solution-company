@@ -8,6 +8,7 @@
     "start": "next start"
   },
   "dependencies": {
+    "clsx": "^2.1.1",
     "lottie-web": "^5.13.0",
     "lucid-package": "^0.0.122",
     "lucide-react": "^0.540.0",

@@ -15,12 +15,10 @@ const year = new Date().getFullYear();
 
 const NAV = {
   discover: [
-    { label: "About Us", href: "/#about" },
-    { label: "Careers", href: "/#careers" },
+    { label: "About Us", href: "/about" },
     { label: "Contact", href: "/contact" },
-    { label: "Insights", href: "/#insights" },
-    { label: "Newsroom", href: "/#news" },
-    { label: "Partners", href: "/#partners" },
+    { label: "Projects", href: "/portfolio" },
+
   ],
   services: [
     { label: "Web Development", href: "/services#webdev" },
@@ -31,18 +29,18 @@ const NAV = {
     { label: "SEO Optimization", href: "/services#seo" },
   ],
   resources: [
-    { label: "Case Studies", href: "/portfolio" },
-    { label: "Pricing", href: "/#pricing" },
-    { label: "FAQs", href: "/#faq" },
-    { label: "Security", href: "/#security" },
-    { label: "Accessibility", href: "/#accessibility" },
+    { label: "Glassdoor", href: "" },
+    { label: "Google", href: "" },
+    { label: "GoodFirms", href: "" },
+    { label: "AmbitionBox", href: "" },
+    { label: "Clutch", href: "" },
   ],
   industries: [
-    { label: "Retail & E-commerce", href: "/#retail" },
-    { label: "SaaS & Startups", href: "/#saas" },
-    { label: "Healthcare", href: "/#health" },
-    { label: "Finance", href: "/#finance" },
-    { label: "Education", href: "/#edu" },
+    { label: "Retail & E-commerce", href: "" },
+    { label: "SaaS & Startups", href: "" },
+    { label: "Healthcare", href: "" },
+    { label: "Finance", href: "" },
+    { label: "Education", href: "" },
   ],
 };
 
@@ -89,7 +87,7 @@ export default function Footer() {
         <div className="mt-14 grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
           <Column title="Discover Denmark Web" items={NAV.discover} />
           <Column title="Services" items={NAV.services} />
-          <Column title="Resources" items={NAV.resources} />
+          <Column title="Reviews" items={NAV.resources} />
           <Column title="Industries" items={NAV.industries} />
         </div>
 

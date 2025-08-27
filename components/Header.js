@@ -9,7 +9,10 @@ import {
   ArrowRight,
   Code2,
   ShoppingBag,
-  Megaphone,
+  Palette,
+  Server,
+  Wrench,
+  Search,
 } from "lucide-react";
 import { usePathname, useRouter } from "next/navigation";
 
@@ -33,9 +36,12 @@ const MESSAGES = {
       contact: "Kontakt",
     },
     services: [
-      { label: "Webudvikling", desc: "Højtydende websites & apps", icon: Code2, href: "#" },
-      { label: "E-handel", desc: "Konverteringsfokuserede webshops", icon: ShoppingBag, href: "#" },
-      { label: "Digital marketing", desc: "SEO, content & vækst", icon: Megaphone, href: "#" },
+      { label: "Webudvikling", desc: "Højtydende websites & apps", icon: Code2, href: "/services" },
+      { label: "Webdesign & UX", desc: "Skalerbare, brugervenlige interfaces", icon: Palette, href: "/services" },
+      { label: "E-handelsløsninger", desc: "Konverteringsfokuserede webshops", icon: ShoppingBag, href: "/services" },
+      { label: "Hosting", desc: "Hurtig, sikker og overvåget drift", icon: Server, href: "/services" },
+      { label: "Vedligehold & support", desc: "Proaktive opdateringer og SLA’er", icon: Wrench, href: "/services" },
+      { label: "SEO-optimering", desc: "Teknik, indhold og CWV", icon: Search, href: "/services" },
     ],
     ctaQuote: "Få et tilbud",
     language: "Sprog",
@@ -66,9 +72,12 @@ const MESSAGES = {
       contact: "Contact",
     },
     services: [
-      { label: "Web Development", desc: "High-performance sites & apps", icon: Code2, href: "#" },
-      { label: "E-commerce", desc: "Conversion-focused storefronts", icon: ShoppingBag, href: "#" },
-      { label: "Digital Marketing", desc: "SEO, content & growth", icon: Megaphone, href: "#" },
+      { label: "Web development", desc: "High-performance sites & apps", icon: Code2, href: "/services" },
+      { label: "Web design & UX", desc: "Accessible, scalable interfaces", icon: Palette, href: "/services" },
+      { label: "E-commerce solutions", desc: "Conversion-focused storefronts", icon: ShoppingBag, href: "/services" },
+      { label: "Hosting", desc: "Fast, secure & monitored", icon: Server, href: "/services" },
+      { label: "Maintenance & support", desc: "Proactive care & SLAs", icon: Wrench, href: "/services" },
+      { label: "SEO optimization", desc: "Technical SEO + CWV", icon: Search, href: "/services" },
     ],
     ctaQuote: "Get a Quote",
     language: "Language",
@@ -272,7 +281,7 @@ const Header = () => {
                   role="menu"
                   aria-label={T.aria.servicesMenu}
                   className={[
-                    "absolute left-0 top-full mt-2 w-[22rem] rounded-lg border border-gray-100 bg-white p-2 shadow-lg",
+                    "absolute left-0 top-full mt-2 w-[26rem] rounded-lg border border-gray-100 bg-white p-2 shadow-lg",
                     "motion-safe:transition-all motion-safe:duration-200",
                     servicesOpen
                       ? "pointer-events-auto translate-y-0 opacity-100"
@@ -284,7 +293,7 @@ const Header = () => {
                     {T.services.map(({ label, href, icon: Icon, desc }) => (
                       <li key={label}>
                         <a
-                          href={href}
+                          href={replaceLocaleInPath(href, locale)}
                           role="menuitem"
                           className="flex items-start gap-3 rounded-md px-3 py-2 hover:bg-gray-50 focus:bg-gray-50 focus:outline-none"
                         >
@@ -440,7 +449,7 @@ const Header = () => {
                   {T.services.map(({ label, href, icon: Icon, desc }) => (
                     <a
                       key={label}
-                      href={href}
+                      href={replaceLocaleInPath(href, locale)}
                       className="flex items-start gap-3 rounded-md px-2 py-2 hover:bg-gray-50 active:bg-gray-100"
                       onClick={() => setMobileOpen(false)}
                     >
