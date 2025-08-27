@@ -113,7 +113,7 @@ export default function TeamSection() {
             </div>
             <div className="py-8 w-full md:w-fit">
               <a
-                href="https://www.linkedin.com/company/bona-agency/"
+                href=""
                 target="_blank"
                 rel="noopener noreferrer"
                 className="font-inter font-semibold text-base lg:text-lg text-[#DA3C00] border border-[#DA3C00] px-2 sm:px-4 xl:px-6 py-3 rounded-full group inline-flex justify-center md:justify-between items-center md:w-fit w-full"
