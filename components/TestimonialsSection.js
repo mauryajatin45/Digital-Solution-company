@@ -121,7 +121,7 @@ export default function TestimonialsSection() {
       </div>
 
       {/* HEADER */}
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-16 sm:pt-20">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-16 sm:pt-20" id="testimonials">
         <div data-animate="in" className="opacity-0 translate-y-6 transition-all duration-700">
           <div className="inline-flex items-center gap-2 rounded-full border border-purple-200 bg-white/70 px-3 py-1 text-xs font-medium text-purple-700 backdrop-blur">
             <span className="h-1.5 w-1.5 rounded-full bg-purple-600" />

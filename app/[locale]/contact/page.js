@@ -3,6 +3,7 @@
 import React, { useMemo, useState } from "react";
 import { usePathname } from "next/navigation";
 import Header from "@/components/Header";
+import Footer from "@/components/Footer";
 
 /* ───────────────────────── helpers: locale in URL ───────────────────────── */
 const LOCALES = ["da", "en"];
@@ -428,6 +429,7 @@ export default function ContactPage() {
           section > div { animation: none !important; }
         }
       `}</style>
+    <Footer/>
     </main>
   );
 }

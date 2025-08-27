@@ -304,10 +304,10 @@ const Header = () => {
                 </div>
               </div>
 
-              <NavLink href={replaceLocaleInPath("/#About", locale)} linkText={linkText} underlineColor={underlineColor}>
+              <NavLink href={replaceLocaleInPath("/about", locale)} linkText={linkText} underlineColor={underlineColor}>
                 {T.nav.about}
               </NavLink>
-              <NavLink href={replaceLocaleInPath("/#portfolio", locale)} linkText={linkText} underlineColor={underlineColor}>
+              <NavLink href={replaceLocaleInPath("/portfolio", locale)} linkText={linkText} underlineColor={underlineColor}>
                 {T.nav.portfolio}
               </NavLink>
               <NavLink href={replaceLocaleInPath("/#testimonials", locale)} linkText={linkText} underlineColor={underlineColor}>
@@ -459,13 +459,13 @@ const Header = () => {
               </details>
 
               <MobileLink
-                href={replaceLocaleInPath("/#About", locale)}
+                href={replaceLocaleInPath("/about", locale)}
                 onClick={() => setMobileOpen(false)}
               >
                 {T.nav.about}
               </MobileLink>
               <MobileLink
-                href={replaceLocaleInPath("/#portfolio", locale)}
+                href={replaceLocaleInPath("/portfolio", locale)}
                 onClick={() => setMobileOpen(false)}
               >
                 {T.nav.portfolio}

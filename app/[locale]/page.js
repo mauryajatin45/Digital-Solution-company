@@ -10,6 +10,7 @@ import ResultsSection from '@/components/ResultsSection';
 import TeamSection from '@/components/TeamSection';
 import ServicesSection from '@/components/ServicesSection';
 import TestimonialsSection from '@/components/TestimonialsSection';
+import Footer from '@/components/Footer';
 
 export default function Home() {
   return (
@@ -24,6 +25,7 @@ export default function Home() {
       <TeamSection />
       <TestimonialsSection />
       <Contact />
+      <Footer />
     </div>
   );
 }

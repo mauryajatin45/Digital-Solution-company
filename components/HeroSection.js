@@ -29,7 +29,7 @@ const MESSAGES = {
         titleLines: ["Rådgivning med", "vores professionelle udvikler"],
         desc:
           "Erfaring med en bred vifte af programmeringssprog og frameworks samt dokumenterede, skalerbare kvalitetsløsninger. Stærk i samarbejde, kodeoptimering og problemløsning.",
-        ctas: [{ label: "Få gratis rådgivning", href: "/#contact" }],
+        ctas: [{ label: "Få gratis rådgivning", href: "/contact" }],
         image: "/img/slid/5.webp",
       },
       {
@@ -38,7 +38,7 @@ const MESSAGES = {
         desc: "Vi kan udvikle denne type platform.",
         ctas: [
           { label: "Vores ydelser", href: "/#services" },
-          { label: "Book møde", href: "/#contact" },
+          { label: "Book møde", href: "/contact" },
         ],
         image: "/img/slid/5.webp",
       },
@@ -60,7 +60,7 @@ const MESSAGES = {
         titleLines: ["Consult With", "Our Professional Developer"],
         desc:
           "Experience across multiple languages and frameworks with a proven record of scalable, high-quality solutions. Strong in collaboration, code optimization, and problem solving.",
-        ctas: [{ label: "Get Free Consultant", href: "/#contact" }],
+        ctas: [{ label: "Get Free Consultant", href: "/contact" }],
         image: "/img/slid/5.webp",
       },
       {
@@ -69,7 +69,7 @@ const MESSAGES = {
         desc: "We are capable of developing this type of platform.",
         ctas: [
           { label: "Our service", href: "/#services" },
-          { label: "Schedule Meeting", href: "/#contact" },
+          { label: "Schedule Meeting", href: "/contact" },
         ],
         image: "/img/slid/5.webp",
       },
@@ -273,7 +273,7 @@ export default function HeroSection() {
             </svg>
             {/* Arrow button */}
             <a
-              href={replaceLocaleInPath("/#contact", locale)}
+              href={replaceLocaleInPath("/contact", locale)}
               className="absolute left-1/2 top-1/2 grid h-12 w-12 -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full bg-white/90 text-black shadow hover:bg-white"
               aria-label={T.inquiryAria}
             >
