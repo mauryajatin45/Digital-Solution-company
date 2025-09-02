@@ -20,7 +20,7 @@ import { usePathname, useRouter } from "next/navigation";
  * Locale + copy
  */
 const SUPPORTED_LOCALES = ["da", "en"];
-const DEFAULT_LOCALE = "da";
+const DEFAULT_LOCALE = "en";
 
 const MESSAGES = {
   da: {

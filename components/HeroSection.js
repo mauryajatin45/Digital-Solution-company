@@ -16,7 +16,7 @@ import "swiper/css/parallax";
  */
 
 const SUPPORTED_LOCALES = ["da", "en"];
-const DEFAULT_LOCALE = "da";
+const DEFAULT_LOCALE = "en";
 
 const MESSAGES = {
   da: {

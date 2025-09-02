@@ -8,7 +8,7 @@ import Footer from "@/components/Footer";
 
 /* ───────────────────────── Locale helpers ───────────────────────── */
 const LOCALES = ["da", "en"];
-const DEFAULT_LOCALE = "da";
+const DEFAULT_LOCALE = "en";
 const getLocaleFromPath = (pathname = "/") => {
   const first = pathname.split("/").filter(Boolean)[0];
   return LOCALES.includes(first) ? first : DEFAULT_LOCALE;
