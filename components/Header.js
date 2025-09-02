@@ -25,7 +25,7 @@ const DEFAULT_LOCALE = "en";
 const MESSAGES = {
   da: {
     brandShort: "DW",
-    brand: "Denmark Web",
+    brand: "Vertex Global Agency",
     brandTag: "Design • Byg • Vækst",
     nav: {
       home: "Hjem",
@@ -47,7 +47,7 @@ const MESSAGES = {
     language: "Sprog",
     aria: {
       skip: "Spring til indhold",
-      brandHome: "Denmark Web — Hjem",
+      brandHome: "Vertex Global Agency — Hjem",
       openMenu: "Åbn menu",
       closeMenu: "Luk menu",
       mobileNav: "Mobilnavigation",
@@ -61,7 +61,7 @@ const MESSAGES = {
   },
   en: {
     brandShort: "DW",
-    brand: "Denmark Web",
+    brand: "Vertex Global Agency",
     brandTag: "Design • Build • Grow",
     nav: {
       home: "Home",
@@ -83,7 +83,7 @@ const MESSAGES = {
     language: "Language",
     aria: {
       skip: "Skip to content",
-      brandHome: "Denmark Web — Home",
+      brandHome: "Vertex Global Agency — Home",
       openMenu: "Open menu",
       closeMenu: "Close menu",
       mobileNav: "Mobile navigation",
@@ -219,14 +219,14 @@ const Header = () => {
               className="flex items-center gap-2 rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black/20"
               aria-label={T.aria.brandHome}
             >
-              <div className="grid h-9 w-9 place-items-center rounded-md bg-black text-white">
-                <span className="text-sm font-bold">{T.brandShort}</span>
-              </div>
+              {/* <div className="grid h-9 w-9 place-items-center rounded-md bg-black text-white"> */}
+                {/* <span className="text-sm font-bold">{T.brandShort}</span> */}
+              {/* </div> */}
               <div className="flex flex-col">
                 <span className={`text-base font-semibold tracking-tight ${brandNameColor}`}>
                   {T.brand}
                 </span>
-                <span className={`text-[11px] leading-none ${brandTagColor}`}>{T.brandTag}</span>
+                {/* <span className={`text-[11px] leading-none ${brandTagColor}`}>{T.brandTag}</span> */}
               </div>
             </a>
 

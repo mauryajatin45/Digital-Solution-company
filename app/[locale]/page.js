@@ -9,19 +9,24 @@ import CreativePortfolio from '@/components/CreativePortfolio';
 import ResultsSection from '@/components/ResultsSection';
 import TeamSection from '@/components/TeamSection';
 import ServicesSection from '@/components/ServicesSection';
+import HowWeWork from '@/components/HowWeWork';
 import TestimonialsSection from '@/components/TestimonialsSection';
 import Footer from '@/components/Footer';
+import MissionVision from '@/components/MissionVision';
+import CaseStudies from '@/components/CaseStudies';
 
 export default function Home() {
   return (
     <div className="relative">
       <Header />
       <HeroSection />
-      {/* <AboutSection /> */}
-      <ExpertiseSection />
       <ServicesSection />
+      <MissionVision/>
+      <ExpertiseSection />
+      <HowWeWork/>
       <ResultsSection />
       <CreativePortfolio />
+      <CaseStudies/>
       <TeamSection />
       <TestimonialsSection />
       <Contact />

@@ -34,10 +34,10 @@ const T = {
     subheading:
       "We partner with trusted platforms to equip businesses with modern tooling and reliable support.",
     stats: [
-      { to: 150, suffix: "+", title: "Satisfied customers", desc: "Cross-industry collaborations — delivery focused on quality, speed, and transparency." },
-      { to: 98, suffix: "%", title: "Customer satisfaction", desc: "Relationships that last. We measure, listen and improve — that’s why clients stay." },
-      { to: 6, suffix: "+", title: "Years of experience", desc: "Years across web, e-commerce and automation. Best practices without the bloat." },
-      { to: 24, suffix: "/7", title: "Support", desc: "When it matters, we respond. Uptime, fixes and advice — round the clock." },
+      { to: 500, suffix: "+", title: "Successful Projects Delivered", desc: "Cross-industry collaborations — delivery focused on quality, speed, and transparency." },
+      { to: 15, suffix: "+", title: "Years of experience", desc: "Years across web, e-commerce and automation. Best practices without the bloat." },
+      { to: 40, suffix: "+", title: "International Awards", desc: "Relationships that last. We measure, listen and improve — that’s why clients stay." },
+      { to: 12, suffix: "+", title: "Global clients accross Countries", desc: "When it matters, we respond. Uptime, fixes and advice — round the clock." },
     ],
   },
 };

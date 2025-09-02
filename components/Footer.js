@@ -4,7 +4,7 @@
 import Link from "next/link";
 
 /**
- * Denmark Web — Footer (dark theme)
+ * Vertex Global Agency — Footer (dark theme)
  * - Monochrome design (black/white)
  * - Crisp, evenly spaced ratings row with dividers
  * - CTA + 4-column site map
@@ -66,7 +66,7 @@ export default function Footer() {
         <div className="grid gap-6 md:grid-cols-[1.2fr_1fr] md:items-center">
           <div>
             <h2 className="text-2xl md:text-3xl font-bold tracking-tight">
-              Enable your digital advantage with Denmark Web
+              Enable your digital advantage with Vertex Global Agency
             </h2>
             <p className="mt-2 max-w-2xl text-white/70">
               From concept to launch and beyond—design, build and grow with a partner who
@@ -85,7 +85,7 @@ export default function Footer() {
 
         {/* Site map */}
         <div className="mt-14 grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
-          <Column title="Discover Denmark Web" items={NAV.discover} />
+          <Column title="Discover Vertex Global Agency" items={NAV.discover} />
           <Column title="Services" items={NAV.services} />
           <Column title="Reviews" items={NAV.resources} />
           <Column title="Industries" items={NAV.industries} />
@@ -131,7 +131,7 @@ export default function Footer() {
         {/* legal row */}
         <div className="mt-10 border-t border-white/10 py-6 text-sm">
           <div className="flex flex-col items-center justify-between gap-3 text-white/70 md:flex-row">
-            <span>© {year} Denmark Web. All rights reserved.</span>
+            <span>© {year} Vertex Global Agency. All rights reserved.</span>
             <nav className="flex flex-wrap items-center gap-x-6 gap-y-2">
               <FooterLink href="/#procurement">Procurement</FooterLink>
               <FooterLink href="/#policies">Corporate Policies</FooterLink>

@@ -87,7 +87,7 @@ const T = {
 
   en: {
     eyebrow: "Core Level",
-    heading: "Services",
+    heading: "Expertise",
     cta: "Learn More",
     aria: {
       section: "Services section",
@@ -96,30 +96,30 @@ const T = {
     // 6 real services (3×2 grid)
     cards: [
       {
-        title: "Web Development",
+        title: "Digital strategy & consulting",
         desc:
-          "Denmark Web delivers fast, secure, and scalable websites & web apps with performance and accessibility in mind.",
+          "Turning business goals into actionable digital roadmaps",
         href: "/services/web-development",
         icon: "wand",
       },
       {
-        title: "Web Design & UX",
+        title: "Brand identity & creative design",
         desc:
-          "User-centric interfaces and strong visual identity that boost engagement and conversions.",
+          "Positioning your brand with clarity and impact.",
         href: "/services/ui-ux",
         icon: "design",
       },
       {
-        title: "E-commerce Solutions",
+        title: "Website & app development",
         desc:
-          "Conversion-ready storefronts: catalog, checkout, payment gateways, and integrations.",
+          "Custom, scalable, and user-focused solutions.",
         href: "/services/e-commerce",
         icon: "eye",
       },
       {
-        title: "Hosting",
+        title: "Paid Media Campaigns",
         desc:
-          "Stable, high-performance hosting with monitoring, backups, and elastic scaling.",
+          "optimized advertising across Google, Meta, and Linkedin",
         href: "/services/hosting",
         icon: "cloud",
       },
@@ -131,7 +131,7 @@ const T = {
         icon: "user",
       },
       {
-        title: "SEO Optimization",
+        title: "SEO & Performance Marketing",
         desc:
           "Technical SEO, content structure, and Core Web Vitals to rank higher and grow organic traffic.",
         href: "/services/seo-optimization",

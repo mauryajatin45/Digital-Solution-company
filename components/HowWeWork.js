@@ -11,28 +11,33 @@ const getLocaleFromPath = (pathname = "/") => {
 
 const COPY = {
   en: {
-    title: "How We Work",
+    title: "Our Process",
     sub: "A streamlined process designed to turn your ideas into high-impact digital products.",
     steps: [
       {
         number: "01",
-        title: "Discovery & Strategy",
-        desc: "We dive deep to understand your goals, audience, and market. Together we outline a clear strategy tailored for measurable results.",
+        title: "Discovery & Analysis",
+        desc: "Understand the brand, market, and audience",
       },
       {
         number: "02",
-        title: "Design & Experience",
-        desc: "Our UX/UI team crafts interfaces that are not only beautiful but also intuitive and accessible across all devices.",
+        title: "Strategy and Planning",
+        desc: "Define positioning, communication and KPIs.",
       },
       {
         number: "03",
-        title: "Build & Launch",
-        desc: "Using modern frameworks and agile methods, we develop scalable, high-performance solutions — ready for launch.",
+        title: "Design and Development",
+        desc: "Build user centric experiences and sclable platforms.",
       },
       {
         number: "04",
-        title: "Growth & Support",
-        desc: "We stay with you post-launch, providing hosting, SEO, and ongoing support to keep your business growing.",
+        title: "Execution & Marketing",
+        desc: "Launch campaigns and digital products with precision.",
+      },
+      {
+        number: "05",
+        title: "Optimization and Growth",
+        desc: "Monitor, refine, and accelerate business results.",
       },
     ],
   },
@@ -87,11 +92,11 @@ export default function HowWeWork() {
         </div>
 
         {/* Steps */}
-        <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-4">
+        <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-5">
           {t.steps.map((s) => (
             <div
               key={s.number}
-              className="group relative rounded-3xl border border-white/10 bg-white/[0.03] p-8 backdrop-blur transition hover:-translate-y-1 hover:bg-white/[0.06]"
+              className="group relative rounded-3xl border border-white/10 bg-white/[0.03] p-4 backdrop-blur transition hover:-translate-y-1 hover:bg-white/[0.06]"
             >
               {/* Number */}
               <div className="mb-6">

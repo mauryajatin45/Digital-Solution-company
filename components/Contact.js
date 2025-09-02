@@ -100,11 +100,11 @@ const M = {
       details: "Project details *",
     },
     placeholders: {
-      firstName: "John",
-      lastName: "Doe",
+      firstName: "Jatin",
+      lastName: "Maurya",
       email: "john@company.com",
-      phone: "+45 12 34 56 78",
-      company: "Your Company ApS",
+      phone: "+91 70690XXXXX",
+      company: "Your Company Name",
       details: "Please describe your project requirements...",
     },
     helper: "We typically respond within 24 hours during business days.",
@@ -132,9 +132,9 @@ const M = {
 
 export default function Contact({
   /** You can still override these via props if needed; otherwise we use locale messages */
-  address = "Nørrebrogade 52, 2200 Copenhagen N, Denmark",
-  phone = "+45 33 12 34 56",
-  email = "hello@denmarkweb.dk",
+  address = "Mumbai • New York • London",
+  phone = "+91 98201 23456",
+  email = "info@vertexglobal.com",
   hours = "Monday – Friday: 9:00 – 17:00",
   onSubmit,
 }) {

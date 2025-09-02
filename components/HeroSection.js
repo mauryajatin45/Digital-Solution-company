@@ -52,7 +52,7 @@ const MESSAGES = {
 
   en: {
     bgAlt: "Settings Infotech IT Services Background",
-    hiddenH1: "Settings Infotech Provides World-Wide IT Services",
+    hiddenH1: "We build digital experiences that transform businesses",
 
     slides: [
       {
@@ -65,11 +65,11 @@ const MESSAGES = {
       },
       {
         id: "s2",
-        titleLines: ["Settings Infotech Provide", "World Wide IT Services"],
-        desc: "We are capable of developing this type of platform.",
+        titleLines: ["We build digital experiences", "That transform businesses"],
+        desc: "From strategy to execution, Vertex Global Agency partners with ambitious brands to deliver creative, scalable, and measurable digital ",
         ctas: [
-          { label: "Our service", href: "/services" },
-          { label: "Schedule Meeting", href: "/contact" },
+          { label: "See our Work", href: "/portfolio" },
+          { label: "Start a Project", href: "/services" },
         ],
         image: "/img/slid/5.webp",
       },
