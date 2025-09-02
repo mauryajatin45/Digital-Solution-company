@@ -9,6 +9,12 @@ export function middleware(request) {
     if (pathname === '/') {
         return NextResponse.redirect(new URL('/en', request.url));
     }
+    
+    // Redirect /da to /en
+    if (pathname.startsWith('/da')) {
+        const newPath = pathname.replace('/da', '/en');
+        return NextResponse.redirect(new URL(newPath, request.url));
+    }
 
     // Allow other requests to proceed
     return NextResponse.next();

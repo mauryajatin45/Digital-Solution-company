@@ -19,7 +19,7 @@ import { usePathname, useRouter } from "next/navigation";
 /**
  * Locale + copy
  */
-const SUPPORTED_LOCALES = ["da", "en"];
+const SUPPORTED_LOCALES = ["en"];
 const DEFAULT_LOCALE = "en";
 
 const MESSAGES = {
@@ -126,10 +126,8 @@ const Header = () => {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [servicesOpen, setServicesOpen] = useState(false);
-  const [langOpen, setLangOpen] = useState(false);
 
   const servicesRef = useRef(null);
-  const langRef = useRef(null);
   const mobileRef = useRef(null);
 
   // scroll -> only matters on HOME (non-home is always opaque)
@@ -146,19 +144,16 @@ const Header = () => {
     function onClick(e) {
       if (servicesOpen && servicesRef.current && !servicesRef.current.contains(e.target))
         setServicesOpen(false);
-      if (langOpen && langRef.current && !langRef.current.contains(e.target))
-        setLangOpen(false);
     }
     document.addEventListener("mousedown", onClick);
     return () => document.removeEventListener("mousedown", onClick);
-  }, [servicesOpen, langOpen]);
+  }, [servicesOpen]);
 
   // esc
   useEffect(() => {
     function onKey(e) {
       if (e.key === "Escape") {
         setServicesOpen(false);
-        setLangOpen(false);
         setMobileOpen(false);
       }
     }
@@ -175,15 +170,6 @@ const Header = () => {
   }, [mobileOpen]);
 
   const toggleMobile = () => setMobileOpen((v) => !v);
-
-  // language switch
-  const handleSwitchLocale = (next) => {
-    const newPath = replaceLocaleInPath(window.location.pathname, next);
-    const search = window.location.search || "";
-    const hash = window.location.hash || "";
-    router.replace(newPath + search + hash);
-    setLangOpen(false);
-  };
 
   /**
    * Transparent/white logic
@@ -327,53 +313,8 @@ const Header = () => {
               </NavLink>
             </nav>
 
-            {/* Right: language + CTA */}
+            {/* Right: CTA */}
             <div className="hidden items-center gap-2 lg:flex">
-              {/* Language */}
-              <div className="relative" ref={langRef}>
-                <button
-                  type="button"
-                  className={`inline-flex items-center gap-2 rounded-md px-3 py-2 ${linkText} focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black/20`}
-                  aria-haspopup="menu"
-                  aria-expanded={langOpen}
-                  aria-controls="lang-menu"
-                  onClick={() => setLangOpen((v) => !v)}
-                >
-                  <Globe className="h-5 w-5 text-current" aria-hidden />
-                  <span className="text-sm">{locale.toUpperCase()}</span>
-                  <ChevronDown
-                    className={`h-4 w-4 text-current transition-transform motion-safe:duration-200 ${
-                      langOpen ? "rotate-180" : "rotate-0"
-                    }`}
-                    aria-hidden
-                  />
-                </button>
-
-                <div
-                  id="lang-menu"
-                  role="menu"
-                  aria-label={T.aria.langMenu}
-                  className={[
-                    "absolute right-0 top-full mt-2 w-40 overflow-hidden rounded-lg border border-gray-100 bg-white p-1 shadow-lg",
-                    "motion-safe:transition-all motion-safe:duration-200",
-                    langOpen
-                      ? "pointer-events-auto translate-y-0 opacity-100"
-                      : "pointer-events-none -translate-y-1 opacity-0",
-                  ].join(" ")}
-                >
-                  {T.langs.map((l) => (
-                    <button
-                      key={l.code}
-                      role="menuitem"
-                      className="w-full rounded-md px-3 py-2 text-left text-sm text-black hover:bg-gray-50 focus:bg-gray-50"
-                      onClick={() => handleSwitchLocale(l.code)}
-                    >
-                      {l.label}
-                    </button>
-                  ))}
-                </div>
-              </div>
-
               {/* CTA with contrast swap */}
               <a
                 href={replaceLocaleInPath("/contact", locale)}
@@ -503,7 +444,7 @@ const Header = () => {
                       key={l.code}
                       className="rounded-full border border-gray-200 px-3 py-1.5 text-sm hover:border-gray-300 hover:bg-gray-50"
                       onClick={() => {
-                        handleSwitchLocale(l.code);
+                        router.push(replaceLocaleInPath(pathname, l.code));
                         setMobileOpen(false);
                       }}
                     >

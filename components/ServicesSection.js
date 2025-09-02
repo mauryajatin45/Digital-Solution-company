@@ -9,7 +9,7 @@ import { usePathname } from "next/navigation";
  * - Uses Denmark Web in copy
  */
 
-const SUPPORTED_LOCALES = ["da", "en"];
+const SUPPORTED_LOCALES = ["en"];
 const DEFAULT_LOCALE = "en";
 
 const getLocaleFromPath = (pathname = "/") => {
