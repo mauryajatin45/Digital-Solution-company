@@ -14,6 +14,7 @@ import TestimonialsSection from '@/components/TestimonialsSection';
 import Footer from '@/components/Footer';
 import MissionVision from '@/components/MissionVision';
 import CaseStudies from '@/components/CaseStudies';
+import WhyPartner from '@/components/WhyPartner';
 
 export default function Home() {
   return (
@@ -24,6 +25,7 @@ export default function Home() {
       <MissionVision/>
       <ExpertiseSection />
       <HowWeWork/>
+      <WhyPartner />
       <ResultsSection />
       <CreativePortfolio />
       <CaseStudies/>
