@@ -16,7 +16,7 @@ const getLocaleFromPath = (pathname = "/") => {
 /* ───────────────────────── Copy (da/en) ───────────────────────── */
 const COPY = {
   en: {
-    seoTitle: "Portfolio | Denmark Web",
+    seoTitle: "Portfolio | Vertex Global",
     heroKicker: "Selected Work",
     heroTitle: "A portfolio of digital products we’ve shipped.",
     heroSub:
@@ -41,7 +41,7 @@ const COPY = {
     empty: "No projects match this filter yet.",
   },
   da: {
-    seoTitle: "Portefølje | Denmark Web",
+    seoTitle: "Portefølje | Vertex Global",
     heroKicker: "Udvalgte cases",
     heroTitle: "En portefølje af digitale produkter vi har leveret.",
     heroSub:
@@ -381,7 +381,7 @@ export default function PortfolioPage() {
                 {t.capTitle}
               </h3>
               <div className="hidden md:block rounded-full border border-black/10 bg-black/5 px-4 py-1.5 text-xs text-black/70">
-                Denmark Web • Design • Build • Grow
+                Vertex Global • Design • Build • Grow
               </div>
             </div>
 

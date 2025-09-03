@@ -17,10 +17,10 @@ const getLocaleFromPath = (pathname = "/") => {
 /* ────────────────────────────── copy / i18n ─────────────────────────────── */
 const T = {
   da: {
-    seoTitle: "Kontakt | Denmark Web",
+    seoTitle: "Kontakt | Vertex Global",
     hero: {
       kicker: "Lad os tale",
-      title: "Kontakt Denmark Web",
+      title: "Kontakt Vertex Global",
       sub: "Fortæl os kort om dit projekt – vi vender tilbage inden for 24 timer på hverdage.",
     },
     blocks: {
@@ -59,7 +59,7 @@ const T = {
         projectType: "Projekttype",
         budget: "Budget (valgfri)",
         message: "Besked",
-        consent: "Jeg accepterer, at Denmark Web må kontakte mig omkring min forespørgsel.",
+        consent: "Jeg accepterer, at Vertex Global må kontakte mig omkring min forespørgsel.",
       },
       placeholders: {
         name: "Dit navn",
@@ -84,28 +84,28 @@ const T = {
     },
   },
   en: {
-    seoTitle: "Contact | Denmark Web",
+    seoTitle: "Contact | Vertex Global Agency",
     hero: {
       kicker: "Let’s talk",
-      title: "Contact Denmark Web",
+      title: "Contact Vertex Global Agency",
       sub: "Tell us briefly about your project — we reply within 24 hours on business days.",
     },
     blocks: {
       visit: {
         title: "Visit our office",
-        address: "Nørrebrogade 52, 2200 Copenhagen N, Denmark",
+        address: "723, 7th floor, North Plaza, Visat-Gandhinagar Road. Motera, 380005",
         hours: "Office hours: Mon–Fri 9:00–17:00",
         open: "Open in Maps",
       },
       call: {
         title: "Call us",
-        number: "+45 33 12 34 56",
+        number: "+91 84014 11896",
         note: "We answer all calls during business hours",
         open: "Call",
       },
       email: {
         title: "Email us",
-        addr: "hello@denmarkweb.dk",
+        addr: "contact@vertexglobal.com",
         note: "We respond within 24 hours",
         open: "Compose",
       },
@@ -126,12 +126,12 @@ const T = {
         projectType: "Project type",
         budget: "Budget (optional)",
         message: "Message",
-        consent: "I agree that Denmark Web may contact me regarding my inquiry.",
+        consent: "I agree that Vertex Global may contact me regarding my inquiry.",
       },
       placeholders: {
-        name: "Your name",
-        email: "name@domain.com",
-        phone: "+45 …",
+        name: "Jatin Maurya",
+        email: "name@company.com",
+        phone: "+91 70690XXXXX",
         company: "Company name",
         projectType: "Select project type",
         budget: "Select budget",
@@ -159,7 +159,7 @@ export default function ContactPage() {
   const locale = useMemo(() => getLocaleFromPath(pathname), [pathname]);
   const t = T[locale];
 
-  const [status, setStatus] = useState("idle"); // "idle" | "sending" | "success" | "error"
+  const [status, setStatus] = useState("idle");
   const [errors, setErrors] = useState({});
 
   function validate(form) {
@@ -248,13 +248,13 @@ export default function ContactPage() {
                   <CardTitle>{t.blocks.call.title}</CardTitle>
                   <CardBody>
                     <p className="text-[15px] text-gray-700">
-                      <a href="tel:+4533123456" className="underline decoration-gray-300 hover:decoration-black">
+                      <a href="tel:+918401411896" className="underline decoration-gray-300 hover:decoration-black">
                         {t.blocks.call.number}
                       </a>
                     </p>
                     <p className="mt-2 text-sm text-gray-500">{t.blocks.call.note}</p>
                     <div className="mt-4">
-                      <ActionButton href="tel:+4533123456" label={t.blocks.call.open} />
+                      <ActionButton href="tel:+918401411896" label={t.blocks.call.open} />
                     </div>
                   </CardBody>
                 </Card>
@@ -264,13 +264,13 @@ export default function ContactPage() {
                   <CardTitle>{t.blocks.email.title}</CardTitle>
                   <CardBody>
                     <p className="text-[15px] text-gray-700">
-                      <a href="mailto:hello@denmarkweb.dk" className="underline decoration-gray-300 hover:decoration-black">
-                        hello@denmarkweb.dk
+                      <a href="mailto:contact@vertexglobal.com" className="underline decoration-gray-300 hover:decoration-black">
+                        contact@vertexglobal.com
                       </a>
                     </p>
                     <p className="mt-2 text-sm text-gray-500">{t.blocks.email.note}</p>
                     <div className="mt-4">
-                      <ActionButton href="mailto:hello@denmarkweb.dk" label={t.blocks.email.open} />
+                      <ActionButton href="mailto:connect@vertexglobal.com" label={t.blocks.email.open} />
                     </div>
                   </CardBody>
                 </Card>
@@ -290,14 +290,15 @@ export default function ContactPage() {
                 <div className="relative overflow-hidden rounded-3xl border border-gray-200 bg-white shadow-sm" aria-label={t.a11y.map}>
                   <div className="aspect-[16/10]">
                     <iframe
-                      title="Denmark Web office map"
+                      title="India Web Office Map"
                       className="h-full w-full"
                       loading="lazy"
                       referrerPolicy="no-referrer-when-downgrade"
                       src={`https://www.google.com/maps?q=${encodeURIComponent(
-                        "Nørrebrogade 52, 2200 København N"
+                        "723, 7th Floor, North Plaza, Visat-Gandhinagar Road, Motera, 380005"
                       )}&output=embed`}
                     />
+
                   </div>
                 </div>
               </div>
@@ -329,23 +330,23 @@ export default function ContactPage() {
                         options={
                           locale === "da"
                             ? [
-                                { v: "webdev", l: "Webudvikling" },
-                                { v: "webux", l: "Webdesign & UX" },
-                                { v: "ecom", l: "E-commerce" },
-                                { v: "hosting", l: "Hosting" },
-                                { v: "maintenance", l: "Vedligehold & support" },
-                                { v: "seo", l: "SEO-optimering" },
-                                { v: "other", l: "Andet" },
-                              ]
+                              { v: "webdev", l: "Webudvikling" },
+                              { v: "webux", l: "Webdesign & UX" },
+                              { v: "ecom", l: "E-commerce" },
+                              { v: "hosting", l: "Hosting" },
+                              { v: "maintenance", l: "Vedligehold & support" },
+                              { v: "seo", l: "SEO-optimering" },
+                              { v: "other", l: "Andet" },
+                            ]
                             : [
-                                { v: "webdev", l: "Web Development" },
-                                { v: "webux", l: "Web Design & UX" },
-                                { v: "ecom", l: "E-commerce" },
-                                { v: "hosting", l: "Hosting" },
-                                { v: "maintenance", l: "Maintenance & Support" },
-                                { v: "seo", l: "SEO Optimization" },
-                                { v: "other", l: "Other" },
-                              ]
+                              { v: "webdev", l: "Web Development" },
+                              { v: "webux", l: "Web Design & UX" },
+                              { v: "ecom", l: "E-commerce" },
+                              { v: "hosting", l: "Hosting" },
+                              { v: "maintenance", l: "Maintenance & Support" },
+                              { v: "seo", l: "SEO Optimization" },
+                              { v: "other", l: "Other" },
+                            ]
                         }
                       />
                       <Select
@@ -355,19 +356,19 @@ export default function ContactPage() {
                         options={
                           locale === "da"
                             ? [
-                                { v: "undisclosed", l: "Ikke afklaret" },
-                                { v: "lt50", l: "Under 50.000 DKK" },
-                                { v: "50-150", l: "50.000 – 150.000 DKK" },
-                                { v: "150-300", l: "150.000 – 300.000 DKK" },
-                                { v: "300plus", l: "300.000+ DKK" },
-                              ]
+                              { v: "undisclosed", l: "Ikke afklaret" },
+                              { v: "lt50", l: "Under 50.000 DKK" },
+                              { v: "50-150", l: "50.000 – 150.000 DKK" },
+                              { v: "150-300", l: "150.000 – 300.000 DKK" },
+                              { v: "300plus", l: "300.000+ DKK" },
+                            ]
                             : [
-                                { v: "undisclosed", l: "Undisclosed" },
-                                { v: "lt50", l: "Under 50,000 DKK" },
-                                { v: "50-150", l: "50,000 – 150,000 DKK" },
-                                { v: "150-300", l: "150,000 – 300,000 DKK" },
-                                { v: "300plus", l: "300,000+ DKK" },
-                              ]
+                              { v: "undisclosed", l: "Undisclosed" },
+                              { v: "lt50", l: "Under 50,000 DKK" },
+                              { v: "50-150", l: "50,000 – 150,000 DKK" },
+                              { v: "150-300", l: "150,000 – 300,000 DKK" },
+                              { v: "300plus", l: "300,000+ DKK" },
+                            ]
                         }
                       />
                     </div>
@@ -407,8 +408,8 @@ export default function ContactPage() {
               <div className="mt-4 text-xs text-gray-500">
                 <p>
                   {locale === "da" ? "Tip: Du kan også skrive direkte til " : "Tip: You can also email "}
-                  <a href="mailto:hello@denmarkweb.dk" className="underline">
-                    hello@denmarkweb.dk
+                  <a href="mailto:contact@vertexglobal.com" className="underline">
+                    contact@vertexglobal.com
                   </a>
                   .
                 </p>
@@ -429,7 +430,7 @@ export default function ContactPage() {
           section > div { animation: none !important; }
         }
       `}</style>
-    <Footer/>
+      <Footer />
     </main>
   );
 }

@@ -64,84 +64,74 @@ const HERO = {
 const SERVICES = {
   en: [
     {
-      slug: "web-development",
-      title: "Web development",
+      slug: "digital-strategy-consulting",
+      title: "Digital Strategy & Consulting",
       description:
-        "Modern, component-driven development with clean architecture and test coverage. We build fast, accessible, and scalable apps on a future-proof stack.",
+        "We align your business objectives with digital capabilities, ensuring every initiative contributes to measurable growth.",
       points: [
-        "Next.js/React front-ends & Node APIs",
-        "Headless architecture & real-time previews",
-        "TypeScript, testing & CI/CD pipelines",
+        "Business-driven digital planning",
+        "Data-backed roadmaps for growth",
+        "Technology alignment with KPIs",
       ],
       image: "https://aavatto.com/wp-content/uploads/2023/07/front-end-development.png",
       imageAlt: "Building modern web apps",
     },
     {
-      slug: "web-design-ux",
-      title: "Web design & UX",
+      slug: "creative-branding",
+      title: "Creative & Branding",
       description:
-        "Research-led design that balances brand and conversion. We craft accessible interfaces and content models that scale with your business.",
+        "From identity systems to campaign visuals, we deliver designs that resonate with your audience and differentiate your brand.",
       points: [
-        "User flows, wireframes & rapid prototypes",
-        "Design systems & responsive UI",
-        "Accessibility (WCAG) baked in",
+        "Logo, brand identity & visual language",
+        "Campaign visuals & art direction",
+        "Cross-platform brand consistency",
       ],
       image: "https://aavatto.com/wp-content/uploads/2023/07/ui-ux-designing.png",
       imageAlt: "Interface design and UX flows",
     },
     {
-      slug: "ecommerce",
-      title: "E-commerce solutions",
+      slug: "technology-development",
+      title: "Technology Development",
       description:
-        "Headless storefronts with performance and conversion at the core. Flexible content, robust integrations, and analytics that matter.",
+        "We build enterprise-grade websites, applications, and platforms using modern frameworks, cloud infrastructure, and secure practices.",
       points: [
-        "Shopify / WooCommerce headless setups",
-        "Checkout & subscription flows",
-        "Payments, CRM & ERP integrations",
-      ],
-      image: "https://aavatto.com/wp-content/uploads/2023/07/e-commerce-development.png",
-      imageAlt: "E-commerce storefront",
-    },
-    {
-      slug: "hosting",
-      title: "Hosting",
-      description:
-        "Fully managed cloud hosting with automated deployments, monitoring, and backups. We keep your site fast, secure, and online.",
-      points: [
-        "Vercel/AWS infrastructure & CDN",
-        "Autoscaling, SSL & edge caching",
-        "Observability: logs, metrics & alerts",
+        "Scalable websites & web apps",
+        "Modern stacks: React, Node, TypeScript",
+        "Cloud infrastructure & security best practices",
       ],
       image: "https://aavatto.com/wp-content/uploads/2023/07/backend-development.png",
       imageAlt: "Cloud hosting and infrastructure",
     },
     {
-      slug: "maintenance-support",
-      title: "Maintenance & support",
+      slug: "marketing-performance",
+      title: "Marketing & Performance",
       description:
-        "Proactive care plans with updates, fixes, enhancements and a dedicated roadmap so your product keeps getting better.",
+        "SEO, paid ads, and social campaigns designed to generate qualified leads, increase visibility, and deliver ROI.",
       points: [
-        "SLAs and on-call support",
-        "Security updates & dependency care",
-        "Quarterly performance & UX improvements",
-      ],
-      image: "https://aavatto.com/wp-content/uploads/2023/07/quality-assurance-1.png",
-      imageAlt: "Ongoing support and improvements",
-    },
-    {
-      slug: "seo",
-      title: "SEO optimization",
-      description:
-        "Technical SEO foundations plus content structure that helps you rank — and a speed budget to keep pages lightning fast.",
-      points: [
-        "Core Web Vitals & schema markup",
-        "Sitemaps, redirects & meta automation",
-        "Keyword-ready content models",
+        "Search engine optimization (SEO)",
+        "Performance-focused ad campaigns",
+        "Conversion tracking & analytics",
       ],
       image: "https://aavatto.com/wp-content/uploads/2023/07/wordpress-development.png",
       imageAlt: "Analytics and SEO graph",
     },
-  ],
+    {
+      slug: "enterprise-solutions",
+      title: "Enterprise Solutions",
+      description:
+        "From CRM to custom dashboards, we design tools that empower organizations to scale efficiently.",
+      points: [
+        "Custom CRM & ERP integrations",
+        "Internal portals & admin dashboards",
+        "Data visualizations & automation tools",
+      ],
+      image: "https://aavatto.com/wp-content/uploads/2023/07/e-commerce-development.png",
+      imageAlt: "E-commerce storefront",
+    },
+  ]
+  ,
+  // Is ka nicha ka kam ka nhai ha ye Denmark language ma ha is liya.
+
   da: [
     {
       slug: "web-development",

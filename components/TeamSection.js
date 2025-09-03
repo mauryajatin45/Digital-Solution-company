@@ -16,7 +16,7 @@ const T = {
     heading: "Mød vores team",
     intro: (
       <>
-        Hos bona <span className="font-bold">er vi mere end bare et digitalt bureau.</span>{" "}
+        Hos Vertex Global <span className="font-bold">er vi mere end bare et digitalt bureau.</span>{" "}
         Vi elsker at være en del af denne rejse. At mærke friheden og at der{" "}
         <span className="font-bold">ingen grænser er for kreativiteten.</span>
       </>
@@ -36,7 +36,7 @@ const T = {
     heading: "Meet Our Team",
     intro: (
       <>
-        At bona <span className="font-bold">we’re more than just a digital agency.</span>{" "}
+        At Vertex Global <span className="font-bold">we’re more than just a digital agency.</span>{" "}
         We love to be part of this adventure. Feeling freedom and that there’s{" "}
         <span className="font-bold">no ceiling for creativity.</span>
       </>
@@ -46,9 +46,9 @@ const T = {
       { role: "CEO & Co - Founder", name: "Paolo B.", imgAlt: "Paolo sitting and working at a cafe" },
       { role: "Community Manager", name: "Julian M.", imgAlt: "Julian standing and leaning against a door" },
     ],
-    ctaTitle: "Want to be part of this?",
+    ctaTitle: "More about our Team.",
     ctaDesc:
-      "We’re growing, and maybe you’re the spark we need next. Designers, devs, content folks: if you feel the vibe, let’s talk!",
+      "A multidisciplinary group of strategists, designers, developers, and marketers working across global offices in Mumbai, New york and London.",
     ctaBtn: "Join the Team",
   },
 };
@@ -113,8 +113,8 @@ export default function TeamSection() {
             </div>
             <div className="py-8 w-full md:w-fit">
               <a
-                href=""
-                target="_blank"
+                href="/en/contact"
+                target=""
                 rel="noopener noreferrer"
                 className="font-inter font-semibold text-base lg:text-lg text-[#DA3C00] border border-[#DA3C00] px-2 sm:px-4 xl:px-6 py-3 rounded-full group inline-flex justify-center md:justify-between items-center md:w-fit w-full"
               >

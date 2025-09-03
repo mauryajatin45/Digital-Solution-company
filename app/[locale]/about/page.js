@@ -7,6 +7,7 @@ import Footer from "@/components/Footer";
 import TeamSection from "@/components/TeamSection";
 import ResultsSection from "@/components/ResultsSection";
 import HowWeWork from "@/components/HowWeWork";
+import WhoWeAre from "@/components/WhoWeAre"
 
 /* ───────────────────────── Locale helpers ───────────────────────── */
 const LOCALES = ["da", "en"];
@@ -25,7 +26,7 @@ const T = {
             titleTop: "An Agency built to",
             titleBottom: "create real value",
             sub:
-                "Denmark Web is a growth partner—nimble, hungry, and results-driven. We execute with purpose and focus on measurable outcomes.",
+                "Vertex Global is a growth partner—nimble, hungry, and results-driven. We execute with purpose and focus on measurable outcomes.",
             cta: "Check Out Our Work",
             image:
                 "https://www.ruckusmarketing.com/wp-content/uploads/2020/03/about-us-hero@3x.jpg",
@@ -37,7 +38,7 @@ const T = {
             titleTop: "Et bureau skabt til",
             titleBottom: "at skabe reel værdi",
             sub:
-                "Denmark Web er din vækstpartner—hurtig, nysgerrig og resultatorienteret. Vi eksekverer med mål og fokus på målbare resultater.",
+                "Vertex Global er din vækstpartner—hurtig, nysgerrig og resultatorienteret. Vi eksekverer med mål og fokus på målbare resultater.",
             cta: "Se vores arbejde",
             image:
                 "https://www.ruckusmarketing.com/wp-content/uploads/2020/03/about-us-hero@3x.jpg",
@@ -97,11 +98,23 @@ export default function AboutPage() {
                 </div>
             </section>
 
+            {/* <WhoWeAre /> */}
+            <section className="relative h-fit w-full bg-gray-50 py-20 px-6 sm:px-8 lg:px-32" id="who-we-are">
+                <div className="max-w-maximum mx-auto text-center">
+                    <h2 className="font-domine font-bold text-4xl lg:text-5xl text-[#020617]">
+                        Who We Are
+                    </h2>
+                    <p className="font-poppins font-normal text-xl text-[#353845] mt-8">
+                        Vertex Global Agency is a full-service digital consultancy helping brands thrive in the modern economy. With over 15 years of experience, we combine strategic insights, creative design, and engineering excellence to deliver transformative digital solutions.
+                    </p>
+                </div>
+            </section>
+
             {/* MANTRA — EXPERTLY · CRAFTED · DISRUPTION */}
             <MantraBlock locale={locale} caption={t.mantraCaption} bubbles={t.bubbles} />
 
             <TeamSection />
-            <HowWeWork/>
+            <HowWeWork />
             <ResultsSection />
             <Footer />
 

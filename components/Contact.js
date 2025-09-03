@@ -132,9 +132,9 @@ const M = {
 
 export default function Contact({
   /** You can still override these via props if needed; otherwise we use locale messages */
-  address = "Mumbai • New York • London",
-  phone = "+91 98201 23456",
-  email = "info@vertexglobal.com",
+  address = "723, 7th floor, North Plaza, Visat-Gandhinagar Road. Motera, 380005",
+  phone = "+91 84014 11896",
+  email = "contact@vertexglobal.com",
   hours = "Monday – Friday: 9:00 – 17:00",
   onSubmit,
 }) {
@@ -341,11 +341,10 @@ export default function Contact({
                   <button
                     type="submit"
                     disabled={submitting}
-                    className={`inline-flex items-center gap-2 rounded-full px-6 py-3 text-white font-medium border-2 border-black transition-colors duration-300 ${
-                      submitting
+                    className={`inline-flex items-center gap-2 rounded-full px-6 py-3 text-white font-medium border-2 border-black transition-colors duration-300 ${submitting
                         ? "bg-gray-700 cursor-not-allowed"
                         : "bg-black hover:bg-gray-800"
-                    }`}
+                      }`}
                   >
                     {submitting ? t.sending : t.send} <span>→</span>
                   </button>
@@ -383,7 +382,7 @@ export default function Contact({
           <aside className="rounded-2xl border border-gray-200 bg-white shadow-sm overflow-hidden">
             <div className="aspect-[2.9/3]">
               <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2255.3083650936!2d12.5509606!3d55.6928922!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x46525313b6c76a2f%3A0x13e737ebf7f7b1a0!2sN%C3%B8rrebrogade%2052%2C%202200%20K%C3%B8benhavn%20N%2C%20Denmark!5e0!3m2!1sen!2sdk!4v1692625284326!5m2!1sen!2sdk"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3672.1682289289576!2d72.6033883750838!3d23.019942579173814!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x395e8348530e2e27%3A0x50e6c1baf6d6a9b1!2sNorth%20Plaza%2C%20723%2C%207th%20Floor%2C%20Visat%20Gandhinagar%20Rd%2C%20Motera%2C%20Ahmedabad%2C%20Gujarat%20380005%2C%20India!5e0!3m2!1sen!2sin!4v1693733388425!5m2!1sen!2sin"
                 width="100%"
                 height="100%"
                 style={{ border: 0 }}
@@ -391,7 +390,8 @@ export default function Contact({
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
                 title={t.aria.mapTitle}
-              ></iframe>
+              />
+
             </div>
             <div className="p-6">
               <h3 className="text-lg font-semibold text-black">

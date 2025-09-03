@@ -17,7 +17,7 @@ const RAW = [
     name: "Joe Ann Bteish",
     portrait: "/img/testominals/joe.jpg",
     quote:
-      "Shiv Aurica delivered beyond expectations—creative, fast, and super professional.",
+      "Vertex Global delivered beyond expectations—creative, fast, and super professional.",
   },
   {
     id: 2,
@@ -146,7 +146,7 @@ export default function TestimonialsSection() {
         >
           <div className="flex flex-wrap items-center justify-between gap-4 rounded-2xl border border-gray-200 bg-white/70 p-4 sm:p-6 backdrop-blur">
             <p className="text-sm sm:text-base text-gray-700">
-              Join 100+ businesses that trust <span className="font-semibold">Shiv Aurica</span>.
+              Join 100+ businesses that trust <span className="font-semibold">Vertex Global</span>.
             </p>
             <a
               href="#contact"

@@ -127,7 +127,7 @@ export default function HeroSection() {
     >
       {/* Background cover image */}
       <Image
-        src="/img/background.avif"
+        src="/bg.png"
         alt={T.bgAlt}
         fill
         priority
