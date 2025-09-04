@@ -179,6 +179,7 @@ export default function TestimonialsSection() {
 
 /** ===== Infinite, draggable, autoplay slider (no deps) ===== */
 function InfiniteSlider({ items }) {
+  const containerRef = useRef(null);
   const trackRef = useRef(null);
   const [isHover, setIsHover] = useState(false);
   const [isDragging, setIsDragging] = useState(false);
@@ -193,11 +194,11 @@ function InfiniteSlider({ items }) {
     const el = trackRef.current;
     if (!el) return;
 
-    const speed = 0.4; // px per frame (tweak for faster/slower)
+    const speed = 0.45; // px per frame (tweak for faster/slower)
     const step = () => {
       if (!isHover && !isDragging) {
         pos.current.progress -= speed;
-        const width = el.scrollWidth / 2; // one set
+        const width = el.scrollWidth / 2; // one set width
         if (Math.abs(pos.current.progress) >= width) {
           // loop back
           pos.current.progress += width;
@@ -215,18 +216,22 @@ function InfiniteSlider({ items }) {
     const el = trackRef.current;
     if (!el) return;
 
+    let dragging = false;
+
     const onDown = (e) => {
+      dragging = true;
       setIsDragging(true);
       pos.current.startX = (e.touches ? e.touches[0].clientX : e.clientX) - pos.current.lastX;
     };
     const onMove = (e) => {
-      if (!isDragging) return;
+      if (!dragging) return;
       const clientX = e.touches ? e.touches[0].clientX : e.clientX;
       pos.current.lastX = clientX - pos.current.startX;
       pos.current.progress = pos.current.lastX;
       el.style.transform = `translate3d(${pos.current.progress}px, 0, 0)`;
     };
     const onUp = () => {
+      dragging = false;
       setIsDragging(false);
       // keep current progress baseline
       pos.current.lastX = pos.current.progress;
@@ -250,34 +255,85 @@ function InfiniteSlider({ items }) {
     };
   }, [isDragging]);
 
-  // buttons
+  // keyboard navigation when the container is focused
+  useEffect(() => {
+    const container = containerRef.current;
+    if (!container) return;
+
+    const onKey = (e) => {
+      if (e.key === "ArrowRight") {
+        e.preventDefault();
+        nudge(1);
+      } else if (e.key === "ArrowLeft") {
+        e.preventDefault();
+        nudge(-1);
+      }
+    };
+
+    container.addEventListener("keydown", onKey);
+    return () => container.removeEventListener("keydown", onKey);
+  }, []);
+
+  // nudge (manual prev/next)
   const nudge = (dir = 1) => {
     const el = trackRef.current;
     if (!el) return;
     const card = el.querySelector("[data-card]");
-    const cardW = card ? card.getBoundingClientRect().width + 24 : 320; // approximate gap 24
-    pos.current.progress += dir * -cardW * 1.2;
+    const gap = 24; // match your gap
+    const cardW = card ? card.getBoundingClientRect().width + gap : 320;
+    // dir === 1 => next (move more negative)
+    pos.current.progress += dir * -cardW * 1.05;
     pos.current.lastX = pos.current.progress;
     el.style.transform = `translate3d(${pos.current.progress}px, 0, 0)`;
   };
 
+  // pause autoplay when focused/hovered via container events (also set tabIndex)
   return (
     <div
+      ref={containerRef}
       className="relative mx-auto max-w-[2000px] px-4 sm:px-6 lg:px-8"
       onMouseEnter={() => setIsHover(true)}
       onMouseLeave={() => setIsHover(false)}
+      onFocus={() => setIsHover(true)}
+      onBlur={() => setIsHover(false)}
+      tabIndex={0}
+      role="region"
+      aria-label="Testimonials carousel"
     >
-
       {/* mask gradient edges */}
       <div className="pointer-events-none absolute inset-y-0 left-0 w-24 bg-gradient-to-r from-white to-transparent" />
       <div className="pointer-events-none absolute inset-y-0 right-0 w-24 bg-gradient-to-l from-white to-transparent" />
+
+      {/* nav buttons */}
+      <button
+        onClick={() => nudge(-1)}
+        aria-label="Previous testimonials"
+        className="absolute left-3 top-1/2 z-20 -translate-y-1/2 rounded-full bg-white/90 p-2 shadow-md hover:bg-white focus:outline-none focus:ring-2 focus:ring-indigo-400"
+        title="Previous"
+      >
+        <svg className="h-5 w-5 text-gray-900" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+          <path d="M15 18l-6-6 6-6" />
+        </svg>
+      </button>
+
+      <button
+        onClick={() => nudge(1)}
+        aria-label="Next testimonials"
+        className="absolute right-3 top-1/2 z-20 -translate-y-1/2 rounded-full bg-white/90 p-2 shadow-md hover:bg-white focus:outline-none focus:ring-2 focus:ring-indigo-400"
+        title="Next"
+      >
+        <svg className="h-5 w-5 text-gray-900" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+          <path d="M9 18l6-6-6-6" />
+        </svg>
+      </button>
 
       {/* track */}
       <div className="overflow-hidden">
         <div
           ref={trackRef}
-          className="flex gap-6 will-change-transform select-none cursor-grab active:cursor-grabbing"
-          style={{ transform: "translate3d(0,0,0)" }}
+          className="flex gap-6 will-change-transform select-none cursor-grab active:cursor-grabbing py-6"
+          style={{ transform: "translate3d(0,0,0)", transition: isDragging ? "none" : "transform 300ms ease" }}
+          aria-live="polite"
         >
           {data.map((t, idx) => (
             <Card key={`${t.id}-${idx}`} t={t} />
@@ -295,9 +351,10 @@ function Card({ t }) {
     <article
       data-card
       className="ts-card relative w-[280px] sm:w-[300px] lg:w-[340px] flex-shrink-0 rounded-2xl border border-white/60 bg-white/70 shadow-[0_6px_30px_rgba(0,0,0,0.06)] backdrop-blur"
+      aria-label={`Testimonial from ${t.name}`}
     >
       {/* Portrait */}
-      <div className="relative aspect-[4/5] w-full overflow-hidden rounded-t-2xl">
+      <div className="relative aspect-[4/5] w-full overflow-hidden rounded-t-2xl bg-gray-100">
         <Image
           src={t.portrait}
           alt={t.name}
@@ -306,39 +363,6 @@ function Card({ t }) {
           className="object-cover"
           priority={false}
         />
-        {/* play/pause UI (visual only; wire to your player if needed) */}
-        {/* <div className="absolute inset-0 flex items-end p-3">
-          <div className="ml-auto flex gap-2">
-            {!playing ? (
-              <button
-                onClick={() => setPlaying(true)}
-                className="rounded-full bg-white/85 p-2 shadow"
-                aria-label="Play Video"
-              >
-                <Image
-                  src="/assets/svg/icon/play-btn.svg"
-                  alt="Play"
-                  width={26}
-                  height={26}
-                />
-              </button>
-            ) : (
-              <button
-                onClick={() => setPlaying(false)}
-                className="rounded-full bg-white/85 p-2 shadow"
-                aria-label="Pause Video"
-              >
-                <Image
-                  src="/assets/svg/icon/pause-btn.svg"
-                  alt="Pause"
-                  width={26}
-                  height={26}
-                />
-              </button>
-            )}
-          </div>
-        </div> */}
-
         {/* bottom fade */}
         <div className="pointer-events-none absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-black/40 to-transparent" />
       </div>

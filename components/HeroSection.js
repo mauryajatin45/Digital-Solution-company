@@ -57,7 +57,7 @@ const MESSAGES = {
     slides: [
       {
         id: "s1",
-        titleLines: ["Consult With", "Our Professional Developer"],
+        titleLines: ["We Build Digital Solutions", "That Drive Growth"],
         desc:
           "Experience across multiple languages and frameworks with a proven record of scalable, high-quality solutions. Strong in collaboration, code optimization, and problem solving.",
         ctas: [{ label: "Get Free Consultant", href: "/contact" }],

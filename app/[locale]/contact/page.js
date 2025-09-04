@@ -88,7 +88,7 @@ const T = {
     hero: {
       kicker: "Let’s talk",
       title: "Contact Vertex Global Agency",
-      sub: "Tell us briefly about your project — we reply within 24 hours on business days.",
+      sub: "We reply within 24 hours with a tailored proposal.",
     },
     blocks: {
       visit: {
@@ -349,7 +349,7 @@ export default function ContactPage() {
                             ]
                         }
                       />
-                      <Select
+                      {/* <Select
                         id="budget"
                         label={t.form.labels.budget}
                         placeholder={t.form.placeholders.budget}
@@ -370,7 +370,7 @@ export default function ContactPage() {
                               { v: "300plus", l: "300,000+ DKK" },
                             ]
                         }
-                      />
+                      /> */}
                     </div>
 
                     <Field

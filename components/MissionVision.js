@@ -1,6 +1,6 @@
 import React from 'react'
 import { motion } from 'framer-motion'
-import { Sparkles, Globe, Target } from 'lucide-react'
+import { Sparkles, Globe, Target, Lightbulb } from 'lucide-react'
 
 // MissionVision.jsx
 // Plain JavaScript React component for Next.js (JSX, not TSX)
@@ -78,7 +78,7 @@ export default function MissionVision({ className = '' }) {
 
           <div className="flex items-start gap-4">
             <div className="flex-shrink-0 w-12 h-12 grid place-items-center rounded-lg bg-white/6">
-              <Target size={20} />
+              <Lightbulb size={20} />
             </div>
 
             <div>

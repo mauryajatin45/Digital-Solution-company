@@ -123,13 +123,13 @@ const T = {
         href: "/services/hosting",
         icon: "cloud",
       },
-      {
-        title: "Maintenance & Support",
-        desc:
-          "Ongoing updates, security patches, and support so your site keeps running smoothly.",
-        href: "/services/maintenance-support",
-        icon: "user",
-      },
+      // {
+      //   title: "Maintenance & Support",
+      //   desc:
+      //     "Ongoing updates, security patches, and support so your site keeps running smoothly.",
+      //   href: "/services/maintenance-support",
+      //   icon: "user",
+      // },
       {
         title: "SEO & Performance Marketing",
         desc:
